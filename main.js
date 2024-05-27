@@ -91,6 +91,7 @@ async function showPosition(position) {
 }getLocation()
 
 locationBtn.addEventListener("click", getLocation)
+locationBtn.addEventListener("touchstart", getLocation)
 
 let prayerTimes
 let prayers
