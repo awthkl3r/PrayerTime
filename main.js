@@ -155,6 +155,30 @@ function isWithinTimeFrame(startTime, endTime) {
 	return now >= startTime && now <= endTime;
 }
 
+function timeToMinutes(time) {
+    let [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes;
+}
+
+function findClosestTime(times, target) {
+    const targetMinutes = timeToMinutes(target);
+
+    let closestTime = times[0];
+    let closestDifference = Math.abs(timeToMinutes(times[0]) - targetMinutes);
+
+    for (let i = 1; i < times.length; i++) {
+        let currentMinutes = timeToMinutes(times[i]);
+        let currentDifference = Math.abs(currentMinutes - targetMinutes);
+
+        if (currentDifference < closestDifference) {
+            closestTime = times[i];
+            closestDifference = currentDifference;
+        }
+    }
+
+    return closestTime;
+}
+
 function step(){
 	count += 1
 	date = new Date()
@@ -179,12 +203,8 @@ function step(){
 	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
 	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
 	
-	let latestPrayer = null;
 	for (let i = 0; i < prayers.length; i++){
-		const prayerTime = parseTime(prayers[i]);
-		
-		if (!latestPrayer || prayerTime > latestPrayer.time) {
-			latestPrayer = prayerTime;
+		if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
 			if(cardiconsB[i+1].classList.contains("d-none")){
 				if(cards[i+1] != null && cardiconsB[i+1] != null){
 					cards[i+1].classList.add("bg-black")
@@ -209,20 +229,7 @@ function step(){
 					cardiconsA[i].classList.add("d-none")
 				}
 			}
-			
 		}
-	}
-	if (isWithinTimeFrame(latestPrayer, new Date(latestPrayer.getTime() + (60 * 60 * 1000)))) {
-		let h = latestPrayer.getHours()
-		let m = latestPrayer.getMinutes()
-		let d_f = `${h <= 12 ? 0 + h.toString() : h-12}:${m <= 9 ? 0 + m.toString() : m}`
-		// console.log(`It's time for ${d_f}!`);
-		
-	} else {
-		let h = latestPrayer.getHours()
-		let m = latestPrayer.getMinutes()
-		let d_f = `${h <= 12 ? 0 + h.toString() : h-12}:${m <= 9 ? 0 + m.toString() : m}`
-		// console.log(`The latest prayer time is ${d_f}`);
 	}
 
 	if((city == null || country == null) && count == 2){
@@ -234,11 +241,7 @@ function step(){
 	}
 
 	getPrayers()
-
-	// console.log("step")
 }
-
-// step()
 
 setTimeout(step, 800)
 setInterval(()=>{
