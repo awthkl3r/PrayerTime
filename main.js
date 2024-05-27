@@ -199,8 +199,7 @@ function step(){
 		console.log(city, country)
 		
 		for (let i = 0; i < prayers.length; i++){
-			if(prayers[i] == findClosestTime(prayers, `${19}:${0}`)){                   //to fix
-				// console.log(findClosestTime(prayers, `${19}:${0}`))
+			if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
 	
 				if(cardiconsB[i+1].classList.contains("d-none")){
 					if(cards[i+1] != null && cardiconsB[i+1] != null){
@@ -216,7 +215,7 @@ function step(){
 					if(cards[i+1] != null && cardiconsB[i+1] != null){
 						cards[i+1].classList.add("bg-black")
 						cards[i+1].classList.add("text-white")
-						cards[i+1].classList.add("float")                    //problem here
+						cards[i+1].classList.add("float")
 						cards[i+1].classList.add("delay")
 	
 						console.log(cards[i+1])
