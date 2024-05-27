@@ -200,19 +200,20 @@ function step(){
 		
 		for (let i = 0; i < prayers.length; i++){
 			if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
-	
-				if(cardiconsB[i+1].classList.contains("d-none")){
-					if(cards[i+1] != null && cardiconsB[i+1] != null){
-						cardiconsB[i+1].classList.remove("d-none")
+				
+				if(cards[i+1] != null && cardiconsB[i+1] != null){
+					if(cardiconsB[i+1].classList.contains("d-none")){
+						if(cards[i+1] != null && cardiconsB[i+1] != null){
+							cardiconsB[i+1].classList.remove("d-none")
+						}
 					}
-				}
-				if(
-					!cardiconsB[i+1].classList.contains("bg-black") && 
-					!cardiconsB[i+1].classList.contains("text-white") && 
-					!cardiconsB[i+1].classList.contains("float") && 
-					!cardiconsB[i+1].classList.contains("delay")
-				  ){
-					if(cards[i+1] != null && cardiconsB[i+1] != null){
+					if(
+						!cardiconsB[i+1].classList.contains("bg-black") && 
+						!cardiconsB[i+1].classList.contains("text-white") && 
+						!cardiconsB[i+1].classList.contains("float") && 
+						!cardiconsB[i+1].classList.contains("delay")
+					){
+						
 						cards[i+1].classList.add("bg-black")
 						cards[i+1].classList.add("text-white")
 						cards[i+1].classList.add("float")
@@ -220,8 +221,8 @@ function step(){
 	
 						console.log(cards[i+1])
 					}
-					
 				}
+				
 	
 				if(cardiconsA[i].classList.contains("d-none")){
 					if(cards[i] != null && cardiconsA[i] != null){	
