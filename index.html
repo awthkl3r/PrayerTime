@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="main.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body class="h-100 overflow-x-hidden">
+    <nav class="navbar bg-black">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <h1 class="text-white font-monospace">Prayertime.</h1>
+            </a>
+        </div>
+    </nav>
+    <section class="p-5 my-3 my-5">
+        <div class="container py-4">
+            <h1 id="warning" class="text-danger text-center"></h1>
+            <h1 id="date" class="text-black text-center">...</h1><br>
+            <h1 id="time" class="text-black text-center">...</h1>
+        </div>
+        <div class="container">
+            <div class="row text-center flex-row align-items-center">
+                <div class="col-md my-4">
+                    <div id="card1" class="card border-dark border-2">
+                        <div class="card-body text-center">
+                            <div id="card1iconA" class="h1 mt-4 mb-3 d-none display-1">
+                                <i class="bi bi-alarm"></i>
+                            </div>
+                            <div id="card1iconB" class="h1 mt-4 mb-3 d-none">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="card-title mt-3">Fajr</h3>
+                            <h3 class="card-title mb-5">فجر</h3>
+                            <h2 id="Fajr" class="card-text my-3"></h2>
+                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md my-4">
+                    <div id="card2" class="card border-dark border-2">
+                        <div class="card-body text-center">
+                            <div id="card2iconA" class="h1 my-4 d-none">
+                                <i class="bi bi-alarm"></i>
+                            </div>
+                            <div id="card2iconB" class="h1 mt-4 mb-3 d-none">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="card-title mt-3">Dhuhr</h3>
+                            <h3 class="card-title mb-5">ظهر</h3>
+                            <h2 id="Dhuhr" class="card-text my-3"></h2>
+                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md my-4">
+                    <div id="card3" class="card border-dark border-2">
+                        <div class="card-body text-center">
+                            <div id="card3iconA" class="h1 my-4 d-none">
+                                <i class="bi bi-alarm"></i>
+                            </div>
+                            <div id="card3iconB" class="h1 mt-4 mb-3 d-none">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="card-title mt-3">Asr</h3>
+                            <h3 class="card-title mb-5">عصر</h3>
+                            <h2 id="Asr" class="card-text my-3"></h2>
+                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md my-4">
+                    <div id="card4" class="card border-dark border-2 ">
+                        <div class="card-body text-center">
+                            <div id="card4iconA" class="h1 my-4 d-none">
+                                <i class="bi bi-alarm"></i>
+                            </div>
+                            <div id="card4iconB" class="h1 mt-4 mb-3 d-none">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="card-title mt-3">Maghrib</h3>
+                            <h3 class="card-title mb-5">مغرب</h3>
+                            <h2 id="Maghrib" class="card-text my-3"></h2>
+                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md my-4">
+                    <div id="card5" class="card border-dark border-2">
+                        <div class="card-body text-center">
+                            <div id="card5iconA" class="h1 my-4 d-none">
+                                <i class="bi bi-alarm"></i>
+                            </div>
+                            <div id="card5iconB" class="h1 mt-4 mb-3 d-none">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="card-title mt-3">Isha</h3>
+                            <h3 class="card-title mb-5">عشاء</h3>
+                            <h2 id="Isha" class="card-text my-3"></h2>
+                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-3">
+            <h1 id="place" class="text-dark text-center fs-5">...</h1>
+        </div>
+    </section>
+
+    <section class="bg-black p-4 text-light position-sticky mt-5 bottom-0 w-100">
+        <div class="container">
+            <div class="d-flex justify-content-center gap-5 align-items-center ">
+                <h2 class="text-capitalize fs-4">Show Prayer Time From Your Location</h1>
+                <div>
+                    <button type="button" id="location" class="btn btn-outline-light btn-lg">Press Here!</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+
+        // const x = document.getElementById("demo");
+        // let lat
+        // let long
+
+        // function getLocation() {
+        // if (navigator.geolocation) {
+        //     navigator.geolocation.watchPosition(showPosition);
+        // } else {
+        //     x.innerHTML = "Geolocation is not supported by this browser.";
+        // }
+        // }
+        // function showPosition(position) {
+        //     x.innerHTML = "Latitude: " + position.coords.latitude +
+            
+        //     "<br>Longitude: " + position.coords.longitude;
+
+        //     lat = position.coords.latitude
+        //     long = position.coords.longitude
+        // }
+
+
+        
+    </script>
+</body>
+</html>
