@@ -1,5 +1,3 @@
-import { Analytics } from "./@vercel/analytics"
-
 let city = null
 let country = null
 
