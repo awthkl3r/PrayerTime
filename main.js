@@ -232,14 +232,12 @@ function step(){
 				if(
 					!cardiconsA[i].classList.contains("bg-black") && 
 					!cardiconsA[i].classList.contains("text-white") && 
-					!cardiconsA[i].classList.contains("float") && 
-					!cardiconsA[i].classList.contains("delay")
+					!cardiconsA[i].classList.contains("float")
 				){
 					if(cards[i] != null && cardiconsA[i] != null){
 						cards[i].classList.add("bg-dark")
 						cards[i].classList.add("text-white")
 						cards[i].classList.add("float")
-						cards[i].classList.add("delay")
 					}
 				}
 				
