@@ -15,28 +15,23 @@ const maghrib = document.getElementById("Maghrib")
 const isha = document.getElementById("Isha")
 const dateText = document.getElementById("date")
 const timeText = document.getElementById("time")
-
 const warningText = document.getElementById("warning")
 const placeText = document.getElementById("place")
-
 const card1 = document.getElementById("card1")
 const card2 = document.getElementById("card2")
 const card3 = document.getElementById("card3")
 const card4 = document.getElementById("card4")
 const card5 = document.getElementById("card5")
-
 const card1iconA = document.getElementById("card1iconA")
 const card2iconA = document.getElementById("card2iconA")
 const card3iconA = document.getElementById("card3iconA")
 const card4iconA = document.getElementById("card4iconA")
 const card5iconA = document.getElementById("card5iconA")
-
 const card1iconB = document.getElementById("card1iconB")
 const card2iconB = document.getElementById("card2iconB")
 const card3iconB = document.getElementById("card3iconB")
 const card4iconB = document.getElementById("card4iconB")
 const card5iconB = document.getElementById("card5iconB")
-
 const locationBtn = document.getElementById("location")
 
 let data 
@@ -130,10 +125,6 @@ async function getPrayers(){
 		maghrib.innerText = newPrayers[3]
 		isha.innerText = newPrayers[4]
 		
-
-		
-		
-
 	} catch (error) {
 		console.error(error);
 	}
