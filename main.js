@@ -177,8 +177,8 @@ function step(){
 	}
 	
 	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
-	timeText.innerText = `${hours <= 12 ? (hours <= 9 ? 0 + hours.toString() : hours) : (hours-12 <= 9 ? 0 + hours.toString() : hours-12)}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
-
+	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
+	
 	let latestPrayer = null;
 	for (let i = 0; i < prayers.length; i++){
 		const prayerTime = parseTime(prayers[i]);
