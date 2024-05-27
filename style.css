@@ -1,0 +1,27 @@
+.float{
+    animation: floating 5s ease-in-out infinite;
+    will-change: transform;
+
+    /* transform: translate(-50%,); */
+}
+
+.delay{
+    animation-delay: 800ms;
+}
+
+.garamond{
+    font-family: "EB Garamond", "Reem Kufi";
+}
+
+
+@keyframes floating{
+    0%{
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

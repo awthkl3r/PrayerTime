@@ -201,11 +201,14 @@ function step(){
 				if(cards[i+1] != null && cardiconsB[i+1] != null){
 					cards[i+1].classList.add("bg-black")
 					cards[i+1].classList.add("text-white")           //after
+					cards[i+1].classList.add("float")           //after
+					cards[i+1].classList.add("delay")           //after
 					cardiconsB[i+1].classList.remove("d-none")
 				}
 				if(cards[i] != null && cardiconsA[i] != null){
 					cards[i].classList.add("bg-dark")
 					cards[i].classList.add("text-white")
+					cards[i].classList.add("float")
 					cardiconsA[i].classList.remove("d-none")
 				}
 			}

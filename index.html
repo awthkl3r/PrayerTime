@@ -7,13 +7,25 @@
     <script type="module" src="main.js"></script>
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gulzar&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
 </head>
-<body class="h-100 overflow-x-hidden">
+<body class="h-100 overflow-x-hidden garamond">
     <nav class="navbar bg-black">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <h1 class="text-white font-monospace">Prayertime.</h1>
+                <h1 class="text-white">Prayertime.</h1>
             </a>
+            <div>
+                
+                <button type="button" id="location" class="btn btn-outline-light btn-lg">Detect Location</button>
+                
+            </div>
         </div>
     </nav>
     <section class="p-5 my-3 my-5">
@@ -25,7 +37,7 @@
         <div class="container">
             <div class="row text-center flex-row align-items-center">
                 <div class="col-md my-4">
-                    <div id="card1" class="card border-dark border-2">
+                    <div id="card1" class="card border-dark border-2 shadow-sm">
                         <div class="card-body text-center">
                             <div id="card1iconA" class="h1 mt-4 mb-3 d-none display-1">
                                 <i class="bi bi-alarm"></i>
@@ -42,7 +54,7 @@
                 </div>
                 
                 <div class="col-md my-4">
-                    <div id="card2" class="card border-dark border-2">
+                    <div id="card2" class="card border-dark border-2 shadow-sm">
                         <div class="card-body text-center">
                             <div id="card2iconA" class="h1 my-4 d-none display-1">
                                 <i class="bi bi-alarm"></i>
@@ -59,7 +71,7 @@
                 </div>
 
                 <div class="col-md my-4">
-                    <div id="card3" class="card border-dark border-2">
+                    <div id="card3" class="card border-dark border-2 shadow-sm">
                         <div class="card-body text-center">
                             <div id="card3iconA" class="h1 my-4 d-none display-1">
                                 <i class="bi bi-alarm"></i>
@@ -76,7 +88,7 @@
                 </div>
 
                 <div class="col-md my-4">
-                    <div id="card4" class="card border-dark border-2 ">
+                    <div id="card4" class="card border-dark border-2 shadow-sm">
                         <div class="card-body text-center">
                             <div id="card4iconA" class="h1 my-4 d-none display-1">
                                 <i class="bi bi-alarm"></i>
@@ -93,7 +105,7 @@
                 </div>
 
                 <div class="col-md my-4">
-                    <div id="card5" class="card border-dark border-2">
+                    <div id="card5" class="card border-dark border-2 shadow-sm">
                         <div class="card-body text-center">
                             <div id="card5iconA" class="h1 my-4 d-none display-1">
                                 <i class="bi bi-alarm"></i>
