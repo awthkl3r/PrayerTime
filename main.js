@@ -132,7 +132,7 @@ async function getPrayers(){
 
 const cards = [card1, card2, card3, card4, card5]
 const cardiconsA = [card1iconA, card2iconA, card3iconA, card4iconA, card5iconA]
-const cardiconsB = [card1iconB, card2iconB, card3iconB, card4iconA, card5iconB]
+const cardiconsB = [card1iconB, card2iconB, card3iconB, card4iconB, card5iconB]
 
 function parseTime(timeStr) {
 	const [hours, minutes] = timeStr.split(":").map(Number);
@@ -196,6 +196,7 @@ function step(){
 	
 	for (let i = 0; i < prayers.length; i++){
 		if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
+
 			if(cardiconsB[i+1].classList.contains("d-none")){
 				if(cards[i+1] != null && cardiconsB[i+1] != null){
 					cards[i+1].classList.add("bg-black")
