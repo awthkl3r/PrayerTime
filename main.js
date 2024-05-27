@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/react"
+
 let city = null
 let country = null
 
