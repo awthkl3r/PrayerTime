@@ -171,7 +171,8 @@ function findClosestTime(times, target) {
 }
 
 function step(){
-	count += 1
+	
+	console.log(count)
 	date = new Date()
 	hours = date.getHours()
 	minutes = date.getMinutes()
@@ -193,42 +194,74 @@ function step(){
 	
 	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
 	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
-	
-	for (let i = 0; i < prayers.length; i++){
-		if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
 
-			if(cardiconsB[i+1].classList.contains("d-none")){
-				if(cards[i+1] != null && cardiconsB[i+1] != null){
-					cards[i+1].classList.add("bg-black")
-					cards[i+1].classList.add("text-white")           //after
-					cards[i+1].classList.add("float")           //after
-					cards[i+1].classList.add("delay")           //after
-					cardiconsB[i+1].classList.remove("d-none")
+	if (city != null && country != null && count > 0){
+		console.log(city, country)
+		
+		for (let i = 0; i < prayers.length; i++){
+			if(prayers[i] == findClosestTime(prayers, `${19}:${0}`)){                   //to fix
+				// console.log(findClosestTime(prayers, `${19}:${0}`))
+	
+				if(cardiconsB[i+1].classList.contains("d-none")){
+					if(cards[i+1] != null && cardiconsB[i+1] != null){
+						cardiconsB[i+1].classList.remove("d-none")
+					}
 				}
-				if(cards[i] != null && cardiconsA[i] != null){
-					cards[i].classList.add("bg-dark")
-					cards[i].classList.add("text-white")
-					cards[i].classList.add("float")
-					cardiconsA[i].classList.remove("d-none")
+				if(
+					!cardiconsB[i+1].classList.contains("bg-black") && 
+					!cardiconsB[i+1].classList.contains("text-white") && 
+					!cardiconsB[i+1].classList.contains("float") && 
+					!cardiconsB[i+1].classList.contains("delay")
+				  ){
+					if(cards[i+1] != null && cardiconsB[i+1] != null){
+						cards[i+1].classList.add("bg-black")
+						cards[i+1].classList.add("text-white")
+						cards[i+1].classList.add("float")                    //problem here
+						cards[i+1].classList.add("delay")
+	
+						console.log(cards[i+1])
+					}
+					
 				}
+	
+				if(cardiconsA[i].classList.contains("d-none")){
+					if(cards[i] != null && cardiconsA[i] != null){	
+						cardiconsA[i].classList.remove("d-none")
+					}
+				}
+				if(
+					!cardiconsA[i].classList.contains("bg-black") && 
+					!cardiconsA[i].classList.contains("text-white") && 
+					!cardiconsA[i].classList.contains("float") && 
+					!cardiconsA[i].classList.contains("delay")
+				){
+					if(cards[i] != null && cardiconsA[i] != null){
+						cards[i].classList.add("bg-dark")
+						cards[i].classList.add("text-white")
+						cards[i].classList.add("float")
+						cards[i].classList.add("delay")
+					}
+				}
+				
 			}
-		}
-		else{
-			if(cardiconsB[i+1] != null){
-				if(cardiconsB[i+1].classList.contains("d-none") == false){
-					cardiconsB[i+1].classList.add("d-none")
+			else{
+				if(cardiconsB[i+1] != null){
+					if(cardiconsB[i+1].classList.contains("d-none") == false){
+						cardiconsB[i+1].classList.add("d-none")
+					}
 				}
-			}
-			if(cardiconsA[i] != null){
-				if(cardiconsA[i].classList.contains("d-none") == false){
-					cardiconsA[i].classList.add("d-none")
+				if(cardiconsA[i] != null){
+					if(cardiconsA[i].classList.contains("d-none") == false){
+						cardiconsA[i].classList.add("d-none")
+					}
 				}
 			}
 		}
 	}
+	
+	
 
 	if((city == null || country == null) && count == 2){
-		// console.log(city, country)
 		warningText.innerText = "Please Press The Button Below To Get Your Prayer Times."
 	}
 	else{
@@ -236,10 +269,16 @@ function step(){
 	}
 
 	getPrayers()
+	count += 1
 }
 
-setTimeout(step, 800)
-setInterval(()=>{
+setTimeout(()=>{
 	step()
-}, 15 * 1000)
+	
+	setInterval(()=>{
+		step()
+	}, 1000)
+
+}, 800)
+
 
