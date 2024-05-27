@@ -55,7 +55,7 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 
 function getLocation() {
 	if (navigator.geolocation) {
-		navigator.geolocation.watchPosition(showPosition);
+		navigator.geolocation.getCurrentPosition(showPosition);
 	} else {
 		console.log('not supported')
 	}
