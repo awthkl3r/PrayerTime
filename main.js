@@ -6,6 +6,8 @@ let month = 0 + (date.getMonth() + 1).toString()
 let day = date.getDate().toString()
 let year = date.getFullYear().toString()
 
+let count = 0
+
 const fajr = document.getElementById("Fajr")
 const dhuhr = document.getElementById("Dhuhr")
 const asr = document.getElementById("Asr")
@@ -153,6 +155,7 @@ function isWithinTimeFrame(startTime, endTime) {
 }
 
 function step(){
+	count += 1
 	date = new Date()
 	hours = date.getHours()
 	minutes = date.getMinutes()
@@ -221,7 +224,7 @@ function step(){
 		// console.log(`The latest prayer time is ${d_f}`);
 	}
 
-	if(city == null || country == null){
+	if((city == null || country == null) && count == 2){
 		// console.log(city, country)
 		warningText.innerText = "Please Press The Button Below To Get Your Prayer Times."
 	}
