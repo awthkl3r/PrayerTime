@@ -6,19 +6,19 @@
     <meta name="title" content="PrayerTime">
     <meta name="description" content=" Get accurate prayer times for your region with our simple and efficient tool. Easy access, designed for simplicity and effectiveness. Stay connected to faith. ">
     <title>PrayerTime.</title>
-    <script type="module" src="main.js"></script>
+    <!-- <script type="module" src="main.js"></script> -->
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gulzar&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
-        <!-- Google tag (gtag.js) -->
+        
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-65S11RJ383"></script>
-    <script>
+    <!-- <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -32,7 +32,7 @@
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "miqo3c1phd");
-    </script>
+    </script> -->
 </head>
 <body class="h-100 overflow-x-hidden garamond">
     <nav class="navbar bg-black">
@@ -40,122 +40,19 @@
             <a class="navbar-brand" href="#">
                 <h1 class="text-white">Prayertime.</h1>
             </a>
-            <div>
+
+            <a class="navbar-brand" href="src/prayers.html">
+                <h3 class="text-black">Prayers</h1>
+            </a>
+            <!-- <div> -->
                 
-                <button type="button" id="location" class="btn btn-outline-light btn-lg">Detect Location</button>
+                <!-- <button type="button" id="location" class="btn btn-outline-light btn-lg">Detect Location</button> -->
                 
-            </div>
+            <!-- </div> -->
         </div>
     </nav>
-    <section class="p-5 my-3 my-5">
-        <div class="container py-4">
-            <h1 id="warning" class="text-danger text-center"></h1>
-            <h1 id="date" class="text-black text-center">...</h1><br>
-            <h1 id="time" class="text-black text-center">...</h1>
-        </div>
-        <div class="container">
-            <div class="row text-center flex-row align-items-center">
-                <div class="col-md my-4">
-                    <div id="card1" class="card border-dark border-2 shadow-sm">
-                        <div class="card-body text-center">
-                            <div id="card1iconA" class="h1 mt-4 mb-3 d-none display-1">
-                                <i class="bi bi-alarm"></i>
-                            </div>
-                            <div id="card1iconB" class="h1 mt-4 mb-3 d-none">
-                                <i class="bi bi-clock"></i>
-                            </div>
-                            <h3 class="card-title mt-3">Fajr</h3>
-                            <h3 class="card-title mb-5">فجر</h3>
-                            <h2 id="Fajr" class="card-text my-3"></h2>
-                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md my-4">
-                    <div id="card2" class="card border-dark border-2 shadow-sm">
-                        <div class="card-body text-center">
-                            <div id="card2iconA" class="h1 my-4 d-none display-1">
-                                <i class="bi bi-alarm"></i>
-                            </div>
-                            <div id="card2iconB" class="h1 mt-4 mb-3 d-none">
-                                <i class="bi bi-clock"></i>
-                            </div>
-                            <h3 class="card-title mt-3">Dhuhr</h3>
-                            <h3 class="card-title mb-5">ظهر</h3>
-                            <h2 id="Dhuhr" class="card-text my-3"></h2>
-                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md my-4">
-                    <div id="card3" class="card border-dark border-2 shadow-sm">
-                        <div class="card-body text-center">
-                            <div id="card3iconA" class="h1 my-4 d-none display-1">
-                                <i class="bi bi-alarm"></i>
-                            </div>
-                            <div id="card3iconB" class="h1 mt-4 mb-3 d-none">
-                                <i class="bi bi-clock"></i>
-                            </div>
-                            <h3 class="card-title mt-3">Asr</h3>
-                            <h3 class="card-title mb-5">عصر</h3>
-                            <h2 id="Asr" class="card-text my-3"></h2>
-                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md my-4">
-                    <div id="card4" class="card border-dark border-2 shadow-sm">
-                        <div class="card-body text-center">
-                            <div id="card4iconA" class="h1 my-4 d-none display-1">
-                                <i class="bi bi-alarm"></i>
-                            </div>
-                            <div id="card4iconB" class="h1 mt-4 mb-3 d-none">
-                                <i class="bi bi-clock"></i>
-                            </div>
-                            <h3 class="card-title mt-3">Maghrib</h3>
-                            <h3 class="card-title mb-5">مغرب</h3>
-                            <h2 id="Maghrib" class="card-text my-3"></h2>
-                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md my-4">
-                    <div id="card5" class="card border-dark border-2 shadow-sm">
-                        <div class="card-body text-center">
-                            <div id="card5iconA" class="h1 my-4 d-none display-1">
-                                <i class="bi bi-alarm"></i>
-                            </div>
-                            <div id="card5iconB" class="h1 mt-4 mb-3 d-none">
-                                <i class="bi bi-clock"></i>
-                            </div>
-                            <h3 class="card-title mt-3">Isha</h3>
-                            <h3 class="card-title mb-5">عشاء</h3>
-                            <h2 id="Isha" class="card-text my-3"></h2>
-                            <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container py-3">
-            <h1 id="place" class="text-dark text-center fs-5">...</h1>
-        </div>
-    </section>
-
-    <section class="bg-black p-4 text-light position-sticky mt-5 bottom-0 w-100 d-none">
-        <div class="container">
-            <div class="d-flex justify-content-center gap-5 align-items-center ">
-                <h2 class="text-capitalize fs-4">Show Prayer Time From Your Location</h1>
-                <div>
-                    <button type="button" id="location" class="btn btn-outline-light btn-lg">Press Here!</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <h1>Home</h1>
 </body>
 </html>
