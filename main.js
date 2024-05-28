@@ -177,8 +177,6 @@ function findClosestTime(times, target) {
 }
 
 function step(){
-	
-	console.log(count)
 	date = new Date()
 	hours = date.getHours()
 	minutes = date.getMinutes()
@@ -202,8 +200,6 @@ function step(){
 	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
 
 	if (city != null && country != null && count > 0){
-		console.log(city, country)
-		
 		for (let i = 0; i < prayers.length; i++){
 			if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
 				
@@ -224,8 +220,6 @@ function step(){
 						cards[i+1].classList.add("text-white")
 						cards[i+1].classList.add("float")
 						cards[i+1].classList.add("delay")
-	
-						console.log(cards[i+1])
 					}
 				}
 				
@@ -236,7 +230,7 @@ function step(){
 					}
 				}
 				if(
-					!cardiconsA[i].classList.contains("bg-black") && 
+					!cardiconsA[i].classList.contains("bg-dark") && 
 					!cardiconsA[i].classList.contains("text-white") && 
 					!cardiconsA[i].classList.contains("float")
 				){
@@ -250,13 +244,34 @@ function step(){
 			}
 			else{
 				if(cardiconsB[i+1] != null){
-					if(cardiconsB[i+1].classList.contains("d-none") == false){
+					if(
+						cardiconsB[i+1].classList.contains("d-none") == false &&
+						cardiconsB[i+1].classList.contains("bg-black") &&
+						cardiconsB[i+1].classList.contains("text-white") &&
+						cardiconsB[i+1].classList.contains("float") &&
+						cardiconsB[i+1].classList.contains("delay") 
+					  )
+					{
+
 						cardiconsB[i+1].classList.add("d-none")
+						cardiconsB[i+1].classList.remove("bg-black")
+						cardiconsB[i+1].classList.remove("text-white")
+						cardiconsB[i+1].classList.remove("float")
+						cardiconsB[i+1].classList.remove("delay")
 					}
 				}
 				if(cardiconsA[i] != null){
-					if(cardiconsA[i].classList.contains("d-none") == false){
+					if(
+						cardiconsA[i].classList.contains("d-none") == false &&
+						cardiconsA[i].classList.contains("bg-dark") &&
+						cardiconsA[i].classList.contains("text-white") &&
+						cardiconsA[i].classList.contains("float")
+					  )
+					{
 						cardiconsA[i].classList.add("d-none")
+						cardiconsA[i].classList.remove("bg-dark") 
+						cardiconsA[i].classList.remove("text-white") 
+						cardiconsA[i].classList.remove("float")
 					}
 				}
 			}
