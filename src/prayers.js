@@ -294,7 +294,7 @@ function step(){
 }
 
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 5; i++) {
 	setTimeout(function() {
 		step();
 	}, i * 1000);
