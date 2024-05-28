@@ -55,12 +55,12 @@ function getLocation() {
 		console.log('not supported')
 	}
 }
-async function showPosition(position) {
+async function showPosition(position) {	
 	lat = position.coords.latitude
 	long = position.coords.longitude
 
 	// const url2 = `https://trueway-geocoding.p.rapidapi.com/ReverseGeocode?location=${lat}%2C${long}&language=en`;
-	const url2 = `https://maptoolkit.p.rapidapi.com/geocode/reverse?lat=${lat}&lon=${long}`;
+	const url2 = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location=${long},${lat}`;
 	const options2 = {
 		method: 'GET',
 		headers: {	
@@ -70,7 +70,8 @@ async function showPosition(position) {
 		}
 	};
 	try {
-		const response = await fetch(url2, options2);
+		const response = await fetch(url2);
+		// const response = await fetch(url2, options2);
 		const result = await response.text();
 
 		geo = JSON.parse(result);
@@ -80,8 +81,8 @@ async function showPosition(position) {
 
 	// console.log()
 
-	city = geo.address.town
-	country = geo.address.state
+	city = geo.address.City
+	country = geo.address.CntryName
 
 	placeText.innerText = `${city}, ${country}`
 }
@@ -209,8 +210,10 @@ function step(){
 			if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
 				
 				if(cards[i+1] != null && cardiconsB[i+1] != null){
+					
 					if(cardiconsB[i+1].classList.contains("d-none")){
 						if(cards[i+1] != null && cardiconsB[i+1] != null){
+							console.log("yes")
 							cardiconsB[i+1].classList.remove("d-none")
 						}
 					}
@@ -294,7 +297,7 @@ function step(){
 }
 
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 6; i++) {
 	setTimeout(function() {
 		step();
 	}, i * 1000);
