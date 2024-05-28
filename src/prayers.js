@@ -59,13 +59,14 @@ async function showPosition(position) {
 	lat = position.coords.latitude
 	long = position.coords.longitude
 
-	const url2 = `https://api.opencagedata.com/geocode/v1/json?q=${lat}%2C${long}&key=333603efe872406083bfe1a33b5bfc38`;
+	// const url2 = `https://trueway-geocoding.p.rapidapi.com/ReverseGeocode?location=${lat}%2C${long}&language=en`;
+	const url2 = `https://maptoolkit.p.rapidapi.com/geocode/reverse?lat=${lat}&lon=${long}`;
 	const options2 = {
 		method: 'GET',
 		headers: {	
 			Accept: 'application/json',
 			'X-RapidAPI-Key': '432de292afmshb50fe55fde71a2ep1ba370jsn088a4004a8d7',
-			'X-RapidAPI-Host': 'prayer-times11.p.rapidapi.com'
+			'X-RapidAPI-Host': 'maptoolkit.p.rapidapi.com'
 		}
 	};
 	try {
@@ -77,13 +78,13 @@ async function showPosition(position) {
 		console.error(error);
 	}
 
-	city = geo.results[0].formatted.split(",")[1]
-	country = geo.results[0].formatted.split(",")[3]
+	// console.log()
+
+	city = geo.address.town
+	country = geo.address.state
 
 	placeText.innerText = `${city}, ${country}`
-
-	// console.log(city, country)
-}getLocation()
+}
 
 locationBtn.addEventListener("click", ()=>{
 	getLocation()
@@ -177,6 +178,9 @@ function findClosestTime(times, target) {
 }
 
 function step(){
+	getLocation()
+	getPrayers()
+	
 	date = new Date()
 	hours = date.getHours()
 	minutes = date.getMinutes()
@@ -195,6 +199,7 @@ function step(){
 	} else {
 		daySuffix = 'th';
 	}
+
 	
 	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
 	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
@@ -210,12 +215,13 @@ function step(){
 						}
 					}
 					if(
-						!cardiconsB[i+1].classList.contains("bg-black") && 
-						!cardiconsB[i+1].classList.contains("text-white") && 
-						!cardiconsB[i+1].classList.contains("float") && 
-						!cardiconsB[i+1].classList.contains("delay")
+						!cards[i+1].classList.contains("bg-black") && 
+						!cards[i+1].classList.contains("text-white") && 
+						!cards[i+1].classList.contains("float") && 
+						!cards[i+1].classList.contains("delay")
 					){
 						
+						// console.log("before time added")
 						cards[i+1].classList.add("bg-black")
 						cards[i+1].classList.add("text-white")
 						cards[i+1].classList.add("float")
@@ -230,11 +236,12 @@ function step(){
 					}
 				}
 				if(
-					!cardiconsA[i].classList.contains("bg-dark") && 
-					!cardiconsA[i].classList.contains("text-white") && 
-					!cardiconsA[i].classList.contains("float")
+					!cards[i].classList.contains("bg-dark") && 
+					!cards[i].classList.contains("text-white") && 
+					!cards[i].classList.contains("float")
 				){
 					if(cards[i] != null && cardiconsA[i] != null){
+						// console.log("NOW time added")
 						cards[i].classList.add("bg-dark")
 						cards[i].classList.add("text-white")
 						cards[i].classList.add("float")
@@ -242,62 +249,61 @@ function step(){
 				}
 				
 			}
-			else{
+			if(prayers[i] != findClosestTime(prayers, `${hours}:${minutes}`)){
+				// console.log("not in time")
 				if(cardiconsB[i+1] != null){
 					if(
-						cardiconsB[i+1].classList.contains("d-none") == false &&
-						cardiconsB[i+1].classList.contains("bg-black") &&
-						cardiconsB[i+1].classList.contains("text-white") &&
-						cardiconsB[i+1].classList.contains("float") &&
-						cardiconsB[i+1].classList.contains("delay") 
+						!cardiconsB[i+1].classList.contains("d-none") &&
+						cards[i+1].classList.contains("bg-black") &&
+						cards[i+1].classList.contains("text-white") &&
+						cards[i+1].classList.contains("float") &&
+						cards[i+1].classList.contains("delay") 
 					  )
 					{
-
+						// console.log("later time removed")
 						cardiconsB[i+1].classList.add("d-none")
-						cardiconsB[i+1].classList.remove("bg-black")
-						cardiconsB[i+1].classList.remove("text-white")
-						cardiconsB[i+1].classList.remove("float")
-						cardiconsB[i+1].classList.remove("delay")
+						cards[i+1].classList.remove("bg-black")
+						cards[i+1].classList.remove("text-white")
+						cards[i+1].classList.remove("float")
+						cards[i+1].classList.remove("delay")
 					}
-				}
-				if(cardiconsA[i] != null){
 					if(
 						cardiconsA[i].classList.contains("d-none") == false &&
-						cardiconsA[i].classList.contains("bg-dark") &&
-						cardiconsA[i].classList.contains("text-white") &&
-						cardiconsA[i].classList.contains("float")
+						cards[i].classList.contains("bg-dark") &&
+						cards[i].classList.contains("text-white") &&
+						cards[i].classList.contains("float")
 					  )
 					{
+						// console.log("NOW time removed")
 						cardiconsA[i].classList.add("d-none")
-						cardiconsA[i].classList.remove("bg-dark") 
-						cardiconsA[i].classList.remove("text-white") 
-						cardiconsA[i].classList.remove("float")
+						cards[i].classList.remove("bg-dark") 
+						cards[i].classList.remove("text-white") 
+						cards[i].classList.remove("float")
 					}
 				}
 			}
 		}
 	}
-	
-	
-
 	if((city == null || country == null) && count == 2){
 		warningText.innerText = "Please Press The Button Below To Get Your Prayer Times."
 	}
 	else{
 		warningText.innerText = " "
 	}
-
-	getPrayers()
 	count += 1
 }
 
-setTimeout(()=>{
-	step()
-	
-	setInterval(()=>{
-		step()
-	}, 1000)
 
-}, 800)
+for (let i = 0; i < 10; i++) {
+	setTimeout(function() {
+		step();
+	}, i * 1000);
+}
+
+
+
+setInterval(()=>{
+	step()
+}, 10 * 60 * 1000)
 
 
