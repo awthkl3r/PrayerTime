@@ -85,8 +85,14 @@ async function showPosition(position) {
 	// console.log(city, country)
 }getLocation()
 
-locationBtn.addEventListener("click", getLocation)
-locationBtn.addEventListener("touchstart", getLocation)
+locationBtn.addEventListener("click", ()=>{
+	getLocation()
+	history.go(0)
+})
+locationBtn.addEventListener("touchstart", ()=>{
+	getLocation()
+	history.go(0)
+}) 	
 
 let prayerTimes
 let prayers
