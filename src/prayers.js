@@ -136,7 +136,7 @@ let finalTime
 let newPrayers = []
 
 async function getPrayers(){
-	const url = `http://api.aladhan.com/v1/timingsByCity/${day}-${month}-${year}?city=${city}&country=${country}&method=4&adjustment=1`;
+	const url = `https://api.aladhan.com/v1/timingsByCity/${day}-${month}-${year}?city=${city}&country=${country}&method=4&adjustment=1`;
 	try {
 		const response1 = await fetch(url);
 		const result1 = await response1.text();
