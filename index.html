@@ -6,19 +6,22 @@
     <meta name="title" content="PrayerTime">
     <meta name="description" content=" Get accurate prayer times for your region with our simple and efficient tool. Easy access, designed for simplicity and effectiveness. Stay connected to faith. ">
     <title>PrayerTime.</title>
-    <!-- <script type="module" src="main.js"></script> -->
+
+    <script src="../howler/dist/howler.js"></script>
+    <script type="module" src="prayers.js"></script>
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="src/style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gulzar&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
-        
+        <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-65S11RJ383"></script>
-    <!-- <script>
+    <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -32,29 +35,28 @@
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "miqo3c1phd");
-    </script> -->
+    </script>
 </head>
-<body class="h-100 overflow-x-hidden garamond">
-    <nav class="navbar bg-black mb-5">
-        <div class="container">
+<body class="h-100 overflow-x-hidden garamond primary-dark text-white ">
+    <nav class="navbar primary">
+        <div class=" col container justify-content-center">
             <a class="navbar-brand" href="#">
                 <h1 class="text-white">Prayertime.</h1>
             </a>
-
-            <a class="navbar-brand" href="src/prayers.html">
-                <h3 class="text-white">Prayers</h1>
+        </div>
+        <div class="container col justify-content-center gap-5">
+            <a class="nav-item text-decoration-none" href="src/prayers.html">
+                <h3 class="text-white">Prayers</h3>
             </a>
-            <!-- <div> -->
-                
-                <!-- <button type="button" id="location" class="btn btn-outline-light btn-lg">Detect Location</button> -->
-                
-            <!-- </div> -->
+            
+            
+            <div>
+                <button type="button" id="location" class="btn btn-outline-light btn-lg">Detect Location</button>
+            </div>
         </div>
     </nav>
-
-    <div class="container">
-        <h1>Home</h1>
-    </div>
-    
+    <section class="p-5 my-3 my-5 h-100">
+        
+    </section>
 </body>
 </html>

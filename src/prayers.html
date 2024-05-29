@@ -7,6 +7,7 @@
     <meta name="description" content=" Get accurate prayer times for your region with our simple and efficient tool. Easy access, designed for simplicity and effectiveness. Stay connected to faith. ">
     <title>PrayerTime.</title>
 
+    <script src="../howler/dist/howler.js"></script>
     <script type="module" src="prayers.js"></script>
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../bootstrap-icons/font/bootstrap-icons.css">
@@ -54,6 +55,11 @@
             </div>
         </div>
     </nav>
+
+    <div class=" loads position-absolute w-100 h-100 z-3 d-flex justify-content-center align-items-center">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div>
+
     <section class="p-5 my-3 my-5 h-100">
         <h1 id="warning" class="text-danger"></h1>
         <div class="d-flex container py-4 flex-row justify-content-between">

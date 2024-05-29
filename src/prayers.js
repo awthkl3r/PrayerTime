@@ -69,6 +69,10 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 const lunarMonthsAr = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 'جمادى الأولى', 'جمادى الثانية', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'];
 const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
+var sound = new Howl({
+	src: ['../athan.mp3']
+});
+
 async function getDate(){
 	fetch('https://api.aladhan.com/v1/gToH/' + (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear())
 		.then(response => response.json())
@@ -82,12 +86,8 @@ async function getDate(){
 			// Convert Hijri day and year to Arabic numerals
 			const arabicHijriDay = String(hijriDay).split('').map(digit => arabicNumerals[digit]).join('');
 			const arabicHijriYear = String(hijriYear).split('').map(digit => arabicNumerals[digit]).join('');
-			const arabicHours = String(hours).split('').map(digit => arabicNumerals[digit]).join('');
-			const arabicMinutes = String(minutes).split('').map(digit => arabicNumerals[digit]).join('');
-			// const arabicHoursF = addLeadingZero(arabicHours).split('').map(digit => arabicNumerals[digit]).join('');
-			// const arabicMinutesF = addLeadingZero(arabicMinutes).split('').map(digit => arabicNumerals[digit]).join('');
-			// console.log(arabicMinutesF)
-
+			const arabicHours = hours <= 12 ? String(hours).split('').map(digit => arabicNumerals[digit]).join('') : String(hours-12).split('').map(digit => arabicNumerals[digit]).join('')
+			const arabicMinutes = (minutes <= 9 ? (0 + String(minutes)).split('').map(digit => arabicNumerals[digit]).join('') : String(minutes).split('').map(digit => arabicNumerals[digit]).join('')) 
 			// Display Hijri date with Arabic numerals
 			dateTextAr.innerText = `${arabicHijriDay} ${lunarMonthsAr[hijriMonth]} ${arabicHijriYear} هـ`;
 
@@ -246,6 +246,12 @@ function step(){
 
 	if (city != null && country != null && count > 0){
 		for (let i = 0; i < prayers.length; i++){
+			// console.log(prayers[i])
+			if(`${hours}:${minutes}` == prayers[i]){
+				sound.play()
+				console.log("Prayer Time")
+				break
+			}
 			if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
 				
 				if(cards[i+1] != null && cardiconsB[i+1] != null){
@@ -357,7 +363,7 @@ for (let i = 0; i < 6; i++) {
 
 setInterval(()=>{
 	step()
-}, 10 * 60 * 1000)
+}, 1 * 60 * 1000)
 
 setInterval(()=>{
 	date = new Date()
@@ -378,6 +384,8 @@ setInterval(()=>{
 	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
 	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
 	getDate()
+
+	
 }, 15 * 1000)
 
 
