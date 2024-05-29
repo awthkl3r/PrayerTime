@@ -6,6 +6,18 @@ let month = 0 + (date.getMonth() + 1).toString()
 let day = date.getDate().toString()
 let year = date.getFullYear().toString()
 
+let daySuffix = '';
+if (day === 1 || day === 21 || day === 31) {
+	daySuffix = 'st';
+} else if (day === 2 || day === 22) {
+	daySuffix = 'nd';
+} else if (day === 3 || day === 23) {
+	daySuffix = 'rd';
+} else {
+	daySuffix = 'th';
+}
+
+
 let count = 0
 
 const fajr = document.getElementById("Fajr")
@@ -208,9 +220,7 @@ function step(){
 	getDate()
 	if(count < 1){
 		getLocation()
-		// getPrayers()
 	}
-	
 	
 	date = new Date()
 	hours = date.getHours()
@@ -220,7 +230,7 @@ function step(){
 	day = date.getDate().toString()
 	year = date.getFullYear().toString()
 
-	let daySuffix = '';
+	daySuffix = '';
 	if (day === 1 || day === 21 || day === 31) {
 		daySuffix = 'st';
 	} else if (day === 2 || day === 22) {
@@ -231,7 +241,6 @@ function step(){
 		daySuffix = 'th';
 	}
 
-	
 	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
 	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
 
@@ -243,7 +252,6 @@ function step(){
 					
 					if(cardiconsB[i+1].classList.contains("d-none")){
 						if(cards[i+1] != null && cardiconsB[i+1] != null){
-							// console.log("yes")
 							cardiconsB[i+1].classList.remove("d-none")
 						}
 					}
@@ -254,14 +262,13 @@ function step(){
 						!cards[i+1].classList.contains("delay")
 					){
 						
-						// console.log("before time added")
 						cards[i+1].classList.add("secondary-dark")
 						cards[i+1].classList.add("text-white")
 						cards[i+1].classList.add("float")
 						cards[i+1].classList.add("delay")
 					}
 				}
-				
+
 				if(cardiconsA[i].classList.contains("d-none")){
 					if(cards[i] != null && cardiconsA[i] != null){	
 						cardiconsA[i].classList.remove("d-none")
@@ -273,7 +280,6 @@ function step(){
 					!cards[i].classList.contains("float")
 				){
 					if(cards[i] != null && cardiconsA[i] != null){
-						// console.log("NOW time added")
 						cards[i].classList.add("secondary")
 						cards[i].classList.add("text-white")
 						cards[i].classList.add("float")
@@ -282,7 +288,6 @@ function step(){
 				
 			}
 			if(prayers[i] != findClosestTime(prayers, `${hours}:${minutes}`)){
-				// console.log("not in time")
 				if(cardiconsB[i+1] != null){
 					if(
 						!cardiconsB[i+1].classList.contains("d-none") &&
@@ -292,7 +297,6 @@ function step(){
 						cards[i+1].classList.contains("delay") 
 					  )
 					{
-						// console.log("later time removed")
 						cardiconsB[i+1].classList.add("d-none")
 						cards[i+1].classList.remove("secondary-dark")
 						cards[i+1].classList.remove("text-white")
@@ -306,7 +310,6 @@ function step(){
 						cards[i].classList.contains("float")
 					  )
 					{
-						// console.log("NOW time removed")
 						cardiconsA[i].classList.add("d-none")
 						cards[i].classList.remove("secondary") 
 						cards[i].classList.remove("text-white") 
@@ -316,13 +319,22 @@ function step(){
 			}
 
 			if(prayers[i] < findClosestTime(prayers, `${hours}:${minutes}`)){
-				if(cardiconsC[i].classList.contains("d-none") == false){
+				if(
+					cardiconsC[i].classList.contains("d-none") &&
+					!cards[i].classList.contains("past")
+			    )
+				{
 					cardiconsC[i].classList.remove("d-none")
+					cards[i].classList.add("past")
 				}
 			}
 			if(prayers[i] > findClosestTime(prayers, `${hours}:${minutes}`)){
-				if(cardiconsC[i].classList.contains("d-none")){
+				if(
+					!cardiconsC[i].classList.contains("d-none") &&
+					cards[i].classList.contains("past")
+				){
 					cardiconsC[i].classList.add("d-none")
+					cards[i].classList.remove("past")
 				}
 			}
 		}
@@ -343,8 +355,6 @@ for (let i = 0; i < 6; i++) {
 	}, i * 1000);
 }
 
-
-
 setInterval(()=>{
 	step()
 }, 10 * 60 * 1000)
@@ -353,6 +363,17 @@ setInterval(()=>{
 	date = new Date()
 	hours = date.getHours()
 	minutes = date.getMinutes()
+
+	daySuffix = '';
+	if (day === 1 || day === 21 || day === 31) {
+		daySuffix = 'st';
+	} else if (day === 2 || day === 22) {
+		daySuffix = 'nd';
+	} else if (day === 3 || day === 23) {
+		daySuffix = 'rd';
+	} else {
+		daySuffix = 'th';
+	}
 
 	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
 	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`

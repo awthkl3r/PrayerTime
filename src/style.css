@@ -27,6 +27,13 @@
     border-color: rgba(0, 0, 0, 0.175);
 }
 
+.past{
+    opacity: 0.1;
+    background-color: var(--primary-dark);
+    color: white;
+    border-color: white;
+}
+
 .float{
     z-index: 2;
     animation: floating 1.5s ease-in-out infinite;
