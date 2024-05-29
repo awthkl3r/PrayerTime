@@ -262,7 +262,6 @@ function step(){
 					}
 				}
 				
-	
 				if(cardiconsA[i].classList.contains("d-none")){
 					if(cards[i] != null && cardiconsA[i] != null){	
 						cardiconsA[i].classList.remove("d-none")
