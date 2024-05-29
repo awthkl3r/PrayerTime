@@ -89,7 +89,7 @@ async function getDate(){
 		.catch(error => {
 			console.error('Error fetching Hijri date:', error);
 		});
-}getDate()
+}
 
 function getLocation() {
 	if (navigator.geolocation) {
@@ -117,6 +117,8 @@ async function showPosition(position) {
 	city = geo.city
 	country = geo.countryCode
 
+	getPrayers()
+
 	placeText.innerText = `${city}, ${country}`
 }
 
@@ -136,6 +138,7 @@ let finalTime
 let newPrayers = []
 
 async function getPrayers(){
+	// getLocation()
 	const url = `https://api.aladhan.com/v1/timingsByCity/${day}-${month}-${year}?city=${city}&country=${country}&method=4&adjustment=1`;
 	try {
 		const response1 = await fetch(url);
@@ -152,6 +155,7 @@ async function getPrayers(){
 			finalTime = (parseInt(hrs <= 12 ? hrs : hrs-12) + ":" + prayers[i].split(":")[1]).toString()
 			newPrayers[i] = finalTime
 		}
+		
 
 		fajr.innerText = newPrayers[0]
 		dhuhr.innerText = newPrayers[1]
@@ -162,7 +166,7 @@ async function getPrayers(){
 	} catch (error) {
 		console.error(error);
 	}
-}getPrayers()
+}
 
 const cards = [card1, card2, card3, card4, card5]
 const cardiconsA = [card1iconA, card2iconA, card3iconA, card4iconA, card5iconA]
@@ -208,7 +212,7 @@ function step(){
 	getDate()
 	if(count < 1){
 		getLocation()
-		getPrayers()
+		// getPrayers()
 	}
 	
 	
