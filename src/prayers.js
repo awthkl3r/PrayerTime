@@ -59,8 +59,8 @@ async function showPosition(position) {
 	lat = position.coords.latitude
 	long = position.coords.longitude
 
-	// const url2 = `https://trueway-geocoding.p.rapidapi.com/ReverseGeocode?location=${lat}%2C${long}&language=en`;
-	const url2 = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location=${long},${lat}`;
+	// const url2 = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location=${long},${lat}`;
+	const url2 = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}&localityLanguage=en`;
 	const options2 = {
 		method: 'GET',
 		headers: {	
@@ -79,10 +79,10 @@ async function showPosition(position) {
 		console.error(error);
 	}
 
-	// console.log()
+	console.log(geo)
 
-	city = geo.address.City
-	country = geo.address.CntryName
+	city = geo.city
+	country = geo.countryCode
 
 	placeText.innerText = `${city}, ${country}`
 }
@@ -103,20 +103,55 @@ let finalTime
 let newPrayers = []
 
 async function getPrayers(){
-	const url = `https://prayer-times11.p.rapidapi.com/timingsByCity/${month+day+year}?method=2&city=${city}&country=${country}`;
-	const options = {
-		method: 'GET',
-		headers: {	
-			Accept: 'application/json',
-			'X-RapidAPI-Key': '432de292afmshb50fe55fde71a2ep1ba370jsn088a4004a8d7',
-			'X-RapidAPI-Host': 'prayer-times11.p.rapidapi.com'
-		}
-	};
+	// const url = `https://prayer-times11.p.rapidapi.com/timingsByCity/${month+day+year}?method=2&city=${city}&country=${country}`;
+	// const options = {
+	// 	method: 'GET',
+	// 	headers: {	
+	// 		Accept: 'application/json',
+	// 		'X-RapidAPI-Key': '432de292afmshb50fe55fde71a2ep1ba370jsn088a4004a8d7',
+	// 		'X-RapidAPI-Host': 'prayer-times11.p.rapidapi.com'
+	// 	}
+	// };
+	// try {
+	// 	const response1 = await fetch(url, options);
+	// 	const result1 = await response1.text();
+	
+	// 	data = JSON.parse(result1);
+	// 	prayerTimes = data.data.timings
+
+	// 	prayers = [prayerTimes.Fajr, prayerTimes.Dhuhr, prayerTimes.Asr, prayerTimes.Maghrib, prayerTimes.Isha]
+
+	// 	for (let i = 0; i < prayers.length; i++){
+	// 		let hrs = prayers[i].split(":")[0]
+	// 		finalTime = (parseInt(hrs <= 12 ? hrs : hrs-12) + ":" + prayers[i].split(":")[1]).toString()
+	// 		newPrayers[i] = finalTime
+	// 	}
+
+	// 	fajr.innerText = newPrayers[0]
+	// 	dhuhr.innerText = newPrayers[1]
+	// 	asr.innerText = newPrayers[2]
+	// 	maghrib.innerText = newPrayers[3]
+	// 	isha.innerText = newPrayers[4]
+		
+	// } catch (error) {
+	// 	console.error(error);
+	// }
+
+	const url = `http://api.aladhan.com/v1/timingsByCity/${day}-${month}-${year}?city=${city}&country=${country}&method=4&adjustment=1`;
+	// const options = {
+	// 	method: 'GET',
+	// 	headers: {	
+	// 		Accept: 'application/json',
+	// 		'X-RapidAPI-Key': '432de292afmshb50fe55fde71a2ep1ba370jsn088a4004a8d7',
+	// 		'X-RapidAPI-Host': 'prayer-times11.p.rapidapi.com'
+	// 	}
+	// };
 	try {
-		const response1 = await fetch(url, options);
+		const response1 = await fetch(url);
 		const result1 = await response1.text();
 	
 		data = JSON.parse(result1);
+		// console.log(data.data.timings)
 		prayerTimes = data.data.timings
 
 		prayers = [prayerTimes.Fajr, prayerTimes.Dhuhr, prayerTimes.Asr, prayerTimes.Maghrib, prayerTimes.Isha]
