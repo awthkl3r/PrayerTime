@@ -66,10 +66,6 @@ async function getDate(){
 			const hijriDay = hijriDate.day;
 			const hijriYear = hijriDate.year;
 
-			// Function to add leading zero if needed
-			const addLeadingZero = (number) => {
-				return toString(number < 10 ? '0' + number : number)
-			};
 
 			// Convert Hijri day and year to Arabic numerals
 			const arabicHijriDay = String(hijriDay).split('').map(digit => arabicNumerals[digit]).join('');
@@ -353,5 +349,15 @@ for (let i = 0; i < 6; i++) {
 setInterval(()=>{
 	step()
 }, 10 * 60 * 1000)
+
+setInterval(()=>{
+	date = new Date()
+	hours = date.getHours()
+	minutes = date.getMinutes()
+
+	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
+	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
+	getDate()
+}, 15 * 1000)
 
 
