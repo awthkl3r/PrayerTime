@@ -58,7 +58,7 @@ const lunarMonthsAr = ['محرم', 'صفر', 'ربيع الأول', 'ربيع ا
 const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
 async function getDate(){
-	fetch('http://api.aladhan.com/v1/gToH/' + (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear())
+	fetch('https://api.aladhan.com/v1/gToH/' + (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear())
 		.then(response => response.json())
 		.then(data => {
 			const hijriDate = data.data.hijri;
