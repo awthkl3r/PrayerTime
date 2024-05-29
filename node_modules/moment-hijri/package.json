@@ -1,0 +1,72 @@
+{
+  "name": "moment-hijri",
+  "version": "2.1.2",
+  "description": "A Hijri calendar (Based on Umm al-Qura calculations) plugin for moment.js.",
+  "author": {
+    "name": "Suhail Alkowaileet",
+    "email": "xsoh.k7@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hijri",
+    "hijriah",
+    "arabic",
+    "lunar",
+    "Umm al-Qura",
+    "date",
+    "calendar",
+    "conversion",
+    "convert"
+  ],
+  "main": "moment-hijri.js",
+  "scripts": {
+    "test": "grunt test",
+    "prepublish": "grunt test"
+  },
+  "homepage": "https://github.com/xsoh/moment-hijri",
+  "bugs": {
+    "url": "https://github.com/xsoh/moment-hijri/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xsoh/moment-hijri.git"
+  },
+  "devDependencies": {
+    "mocha": "~6.1.4",
+    "chai": "~4.2.0",
+    "grunt": "^1.0.4",
+    "grunt-cli": "^1.3.2",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-shell": "^2.1.0",
+    "bower": "^1.8.8"
+  },
+  "dependencies": {
+    "moment": "^2.24.0"
+  },
+  "jshintConfig": {
+    "camelcase": true,
+    "eqeqeq": true,
+    "forin": true,
+    "freeze": true,
+    "immed": true,
+    "indent": 2,
+    "latedef": "nofunc",
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonew": true,
+    "plusplus": true,
+    "quotmark": true,
+    "undef": true,
+    "unused": true,
+    "strict": true,
+    "trailing": true,
+    "asi": true,
+    "eqnull": true,
+    "laxbreak": true,
+    "laxcomma": true,
+    "node": true
+  }
+}

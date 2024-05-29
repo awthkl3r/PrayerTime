@@ -15,6 +15,8 @@ const maghrib = document.getElementById("Maghrib")
 const isha = document.getElementById("Isha")
 const dateText = document.getElementById("date")
 const timeText = document.getElementById("time")
+const dateTextAr = document.getElementById("date-ar")
+const timeTextAr = document.getElementById("time-ar")
 const warningText = document.getElementById("warning")
 const placeText = document.getElementById("place")
 const card1 = document.getElementById("card1")
@@ -32,6 +34,11 @@ const card2iconB = document.getElementById("card2iconB")
 const card3iconB = document.getElementById("card3iconB")
 const card4iconB = document.getElementById("card4iconB")
 const card5iconB = document.getElementById("card5iconB")
+const card1iconC = document.getElementById("card1iconC")
+const card2iconC = document.getElementById("card2iconC")
+const card3iconC = document.getElementById("card3iconC")
+const card4iconC = document.getElementById("card4iconC")
+const card5iconC = document.getElementById("card5iconC")
 const locationBtn = document.getElementById("location")
 
 let data 
@@ -47,6 +54,42 @@ let lat
 let long
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const lunarMonthsAr = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 'جمادى الأولى', 'جمادى الثانية', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'];
+const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+async function getDate(){
+	fetch('http://api.aladhan.com/v1/gToH/' + (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear())
+		.then(response => response.json())
+		.then(data => {
+			const hijriDate = data.data.hijri;
+			const hijriMonth = hijriDate.month.number - 1; // Adjusting to array index
+			const hijriDay = hijriDate.day;
+			const hijriYear = hijriDate.year;
+
+			// Function to add leading zero if needed
+			const addLeadingZero = (number) => {
+				return toString(number < 10 ? '0' + number : number)
+			};
+
+			// Convert Hijri day and year to Arabic numerals
+			const arabicHijriDay = String(hijriDay).split('').map(digit => arabicNumerals[digit]).join('');
+			const arabicHijriYear = String(hijriYear).split('').map(digit => arabicNumerals[digit]).join('');
+			const arabicHours = String(hours).split('').map(digit => arabicNumerals[digit]).join('');
+			const arabicMinutes = String(minutes).split('').map(digit => arabicNumerals[digit]).join('');
+			// const arabicHoursF = addLeadingZero(arabicHours).split('').map(digit => arabicNumerals[digit]).join('');
+			// const arabicMinutesF = addLeadingZero(arabicMinutes).split('').map(digit => arabicNumerals[digit]).join('');
+			// console.log(arabicMinutesF)
+
+			// Display Hijri date with Arabic numerals
+			dateTextAr.innerText = `${arabicHijriDay} ${lunarMonthsAr[hijriMonth]} ${arabicHijriYear} هـ`;
+
+			// Display current time
+			timeTextAr.innerText = `${arabicHours}:${arabicMinutes}`;
+		})
+		.catch(error => {
+			console.error('Error fetching Hijri date:', error);
+		});
+}getDate()
 
 function getLocation() {
 	if (navigator.geolocation) {
@@ -59,19 +102,9 @@ async function showPosition(position) {
 	lat = position.coords.latitude
 	long = position.coords.longitude
 
-	// const url2 = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location=${long},${lat}`;
 	const url2 = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}&localityLanguage=en`;
-	const options2 = {
-		method: 'GET',
-		headers: {	
-			Accept: 'application/json',
-			'X-RapidAPI-Key': '432de292afmshb50fe55fde71a2ep1ba370jsn088a4004a8d7',
-			'X-RapidAPI-Host': 'maptoolkit.p.rapidapi.com'
-		}
-	};
 	try {
 		const response = await fetch(url2);
-		// const response = await fetch(url2, options2);
 		const result = await response.text();
 
 		geo = JSON.parse(result);
@@ -79,7 +112,7 @@ async function showPosition(position) {
 		console.error(error);
 	}
 
-	console.log(geo)
+	// console.log(geo)
 
 	city = geo.city
 	country = geo.countryCode
@@ -103,49 +136,7 @@ let finalTime
 let newPrayers = []
 
 async function getPrayers(){
-	// const url = `https://prayer-times11.p.rapidapi.com/timingsByCity/${month+day+year}?method=2&city=${city}&country=${country}`;
-	// const options = {
-	// 	method: 'GET',
-	// 	headers: {	
-	// 		Accept: 'application/json',
-	// 		'X-RapidAPI-Key': '432de292afmshb50fe55fde71a2ep1ba370jsn088a4004a8d7',
-	// 		'X-RapidAPI-Host': 'prayer-times11.p.rapidapi.com'
-	// 	}
-	// };
-	// try {
-	// 	const response1 = await fetch(url, options);
-	// 	const result1 = await response1.text();
-	
-	// 	data = JSON.parse(result1);
-	// 	prayerTimes = data.data.timings
-
-	// 	prayers = [prayerTimes.Fajr, prayerTimes.Dhuhr, prayerTimes.Asr, prayerTimes.Maghrib, prayerTimes.Isha]
-
-	// 	for (let i = 0; i < prayers.length; i++){
-	// 		let hrs = prayers[i].split(":")[0]
-	// 		finalTime = (parseInt(hrs <= 12 ? hrs : hrs-12) + ":" + prayers[i].split(":")[1]).toString()
-	// 		newPrayers[i] = finalTime
-	// 	}
-
-	// 	fajr.innerText = newPrayers[0]
-	// 	dhuhr.innerText = newPrayers[1]
-	// 	asr.innerText = newPrayers[2]
-	// 	maghrib.innerText = newPrayers[3]
-	// 	isha.innerText = newPrayers[4]
-		
-	// } catch (error) {
-	// 	console.error(error);
-	// }
-
 	const url = `http://api.aladhan.com/v1/timingsByCity/${day}-${month}-${year}?city=${city}&country=${country}&method=4&adjustment=1`;
-	// const options = {
-	// 	method: 'GET',
-	// 	headers: {	
-	// 		Accept: 'application/json',
-	// 		'X-RapidAPI-Key': '432de292afmshb50fe55fde71a2ep1ba370jsn088a4004a8d7',
-	// 		'X-RapidAPI-Host': 'prayer-times11.p.rapidapi.com'
-	// 	}
-	// };
 	try {
 		const response1 = await fetch(url);
 		const result1 = await response1.text();
@@ -176,14 +167,14 @@ async function getPrayers(){
 const cards = [card1, card2, card3, card4, card5]
 const cardiconsA = [card1iconA, card2iconA, card3iconA, card4iconA, card5iconA]
 const cardiconsB = [card1iconB, card2iconB, card3iconB, card4iconB, card5iconB]
+const cardiconsC = [card1iconC, card2iconC, card3iconC, card4iconC, card5iconC]
 
 function parseTime(timeStr) {
 	const [hours, minutes] = timeStr.split(":").map(Number);
 	const now = new Date();
 	return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
 }
-  
-// Function to check if current time is within a given time frame
+
 function isWithinTimeFrame(startTime, endTime) {
 	const now = new Date();
 	return now >= startTime && now <= endTime;
@@ -214,8 +205,12 @@ function findClosestTime(times, target) {
 }
 
 function step(){
-	getLocation()
-	getPrayers()
+	getDate()
+	if(count < 1){
+		getLocation()
+		getPrayers()
+	}
+	
 	
 	date = new Date()
 	hours = date.getHours()
@@ -248,19 +243,19 @@ function step(){
 					
 					if(cardiconsB[i+1].classList.contains("d-none")){
 						if(cards[i+1] != null && cardiconsB[i+1] != null){
-							console.log("yes")
+							// console.log("yes")
 							cardiconsB[i+1].classList.remove("d-none")
 						}
 					}
 					if(
-						!cards[i+1].classList.contains("bg-black") && 
+						!cards[i+1].classList.contains("secondary-dark") && 
 						!cards[i+1].classList.contains("text-white") && 
 						!cards[i+1].classList.contains("float") && 
 						!cards[i+1].classList.contains("delay")
 					){
 						
 						// console.log("before time added")
-						cards[i+1].classList.add("bg-black")
+						cards[i+1].classList.add("secondary-dark")
 						cards[i+1].classList.add("text-white")
 						cards[i+1].classList.add("float")
 						cards[i+1].classList.add("delay")
@@ -274,13 +269,13 @@ function step(){
 					}
 				}
 				if(
-					!cards[i].classList.contains("bg-dark") && 
+					!cards[i].classList.contains("secondary") && 
 					!cards[i].classList.contains("text-white") && 
 					!cards[i].classList.contains("float")
 				){
 					if(cards[i] != null && cardiconsA[i] != null){
 						// console.log("NOW time added")
-						cards[i].classList.add("bg-dark")
+						cards[i].classList.add("secondary")
 						cards[i].classList.add("text-white")
 						cards[i].classList.add("float")
 					}
@@ -292,7 +287,7 @@ function step(){
 				if(cardiconsB[i+1] != null){
 					if(
 						!cardiconsB[i+1].classList.contains("d-none") &&
-						cards[i+1].classList.contains("bg-black") &&
+						cards[i+1].classList.contains("secondary-dark") &&
 						cards[i+1].classList.contains("text-white") &&
 						cards[i+1].classList.contains("float") &&
 						cards[i+1].classList.contains("delay") 
@@ -300,24 +295,35 @@ function step(){
 					{
 						// console.log("later time removed")
 						cardiconsB[i+1].classList.add("d-none")
-						cards[i+1].classList.remove("bg-black")
+						cards[i+1].classList.remove("secondary-dark")
 						cards[i+1].classList.remove("text-white")
 						cards[i+1].classList.remove("float")
 						cards[i+1].classList.remove("delay")
 					}
 					if(
 						cardiconsA[i].classList.contains("d-none") == false &&
-						cards[i].classList.contains("bg-dark") &&
+						cards[i].classList.contains("secondary") &&
 						cards[i].classList.contains("text-white") &&
 						cards[i].classList.contains("float")
 					  )
 					{
 						// console.log("NOW time removed")
 						cardiconsA[i].classList.add("d-none")
-						cards[i].classList.remove("bg-dark") 
+						cards[i].classList.remove("secondary") 
 						cards[i].classList.remove("text-white") 
 						cards[i].classList.remove("float")
 					}
+				}
+			}
+
+			if(prayers[i] < findClosestTime(prayers, `${hours}:${minutes}`)){
+				if(cardiconsC[i].classList.contains("d-none") == false){
+					cardiconsC[i].classList.remove("d-none")
+				}
+			}
+			if(prayers[i] > findClosestTime(prayers, `${hours}:${minutes}`)){
+				if(cardiconsC[i].classList.contains("d-none")){
+					cardiconsC[i].classList.add("d-none")
 				}
 			}
 		}

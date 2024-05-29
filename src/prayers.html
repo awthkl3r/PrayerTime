@@ -36,8 +36,8 @@
         })(window, document, "clarity", "script", "miqo3c1phd");
     </script>
 </head>
-<body class="h-100 overflow-x-hidden garamond">
-    <nav class="navbar bg-black ">
+<body class="h-100 overflow-x-hidden garamond primary-dark text-white ">
+    <nav class="navbar primary">
         <div class=" col container justify-content-center">
             <a class="navbar-brand" href="#">
                 <h1 class="text-white">Prayertime.</h1>
@@ -54,94 +54,120 @@
             </div>
         </div>
     </nav>
-    <section class="p-5 my-3 my-5">
-        <div class="container py-4">
-            <h1 id="warning" class="text-danger text-center"></h1>
-            <h1 id="date" class="text-black text-center">...</h1><br>
-            <h1 id="time" class="text-black text-center">...</h1>
+    <section class="p-5 my-3 my-5 h-100">
+        <h1 id="warning" class="text-danger"></h1>
+        <div class="d-flex container py-4 flex-row justify-content-between">
+            <h1 id="date" class="">...</h1>
+            <h1 id="date-ar" class="">...</h1>
         </div>
-        <div class="container">
+        <div class="d-flex container py-4 flex-row justify-content-between">
+            <h1 id="time" class="">...</h1>
+            <h1 id="time-ar" class="">...</h1>
+        </div>
+        <div class="container bottom-0">
             <div class="row text-center flex-row align-items-center">
                 <div class="col-md my-4">
-                    <div id="card1" class="card border-dark border-2 shadow-sm">
+                    <div id="card1" class="card border-secondary-custom border-2">
                         <div class="card-body text-center">
+                            <h1 id="card1iconC" class="d-none"><i class="bi bi-check"></i></h1>
                             <div id="card1iconA" class="h1 mt-4 mb-3 d-none display-1">
                                 <i class="bi bi-alarm"></i>
                             </div>
                             <div id="card1iconB" class="h1 mt-4 mb-3 d-none">
                                 <i class="bi bi-clock"></i>
                             </div>
-                            <h3 class="card-title mt-3">Fajr</h3>
+                            <h3 class="card-title mt-3 mb-2">Fajr</h3>
                             <h3 class="card-title mb-5">فجر</h3>
-                            <h2 id="Fajr" class="card-text my-3"></h2>
+                            <div class="container d-flex flex-row justify-content-around">
+                                <h2 id="Fajr" class="card-text my-3"></h2>
+                                <h2 class=" my-3"><i class="bi bi-sunrise"></i></h2>
+                            </div>
+                            
                             <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-md my-4">
-                    <div id="card2" class="card border-dark border-2 shadow-sm">
+                    <div id="card2" class="card border-secondary-custom border-2">
                         <div class="card-body text-center">
+                            <h1 id="card2iconC" class="d-none"><i class="bi bi-check"></i></h1>
                             <div id="card2iconA" class="h1 my-4 d-none display-1">
                                 <i class="bi bi-alarm"></i>
                             </div>
                             <div id="card2iconB" class="h1 mt-4 mb-3 d-none">
                                 <i class="bi bi-clock"></i>
                             </div>
-                            <h3 class="card-title mt-3">Dhuhr</h3>
+                            <h3 class="card-title mt-3 mb-2">Dhuhr</h3>
                             <h3 class="card-title mb-5">ظهر</h3>
-                            <h2 id="Dhuhr" class="card-text my-3"></h2>
+                            <div class="container d-flex flex-row justify-content-around">
+                                <h2 id="Dhuhr" class="card-text my-3"></h2>
+
+                                <h2 class="my-3"><i class="bi bi-brightness-high"></i></h2>
+                            </div>
                             <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md my-4">
-                    <div id="card3" class="card border-dark border-2 shadow-sm">
+                    <div id="card3" class="card border-secondary-custom border-2">
                         <div class="card-body text-center">
+                            <h1 id="card3iconC" class="d-none"><i class="bi bi-check"></i></h1>
                             <div id="card3iconA" class="h1 my-4 d-none display-1">
                                 <i class="bi bi-alarm"></i>
                             </div>
                             <div id="card3iconB" class="h1 mt-4 mb-3 d-none">
                                 <i class="bi bi-clock"></i>
                             </div>
-                            <h3 class="card-title mt-3">Asr</h3>
+                            <h3 class="card-title mt-3 mb-2">Asr</h3>
                             <h3 class="card-title mb-5">عصر</h3>
-                            <h2 id="Asr" class="card-text my-3"></h2>
+                            <div class="container d-flex flex-row justify-content-around">
+                                <h2 id="Asr" class="card-text my-3"></h2>
+                                <h2 class=" my-3"><i class="bi bi-cloud-sun"></i></h2>
+                            </div>
                             <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md my-4">
-                    <div id="card4" class="card border-dark border-2 shadow-sm">
+                    <div id="card4" class="card border-secondary-custom border-2">
                         <div class="card-body text-center">
+                            <h1 id="card4iconC" class="d-none"><i class="bi bi-check"></i></h1>
                             <div id="card4iconA" class="h1 my-4 d-none display-1">
                                 <i class="bi bi-alarm"></i>
                             </div>
                             <div id="card4iconB" class="h1 mt-4 mb-3 d-none">
                                 <i class="bi bi-clock"></i>
                             </div>
-                            <h3 class="card-title mt-3">Maghrib</h3>
+                            <h3 class="card-title mt-3 mb-2">Maghrib</h3>
                             <h3 class="card-title mb-5">مغرب</h3>
-                            <h2 id="Maghrib" class="card-text my-3"></h2>
+                            <div class="container d-flex flex-row justify-content-around">
+                                <h2 id="Maghrib" class="card-text my-3"></h2>
+                                <h2 class=" my-3"><i class="bi bi-sunset"></i></h2>
+                            </div>
                             <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md my-4">
-                    <div id="card5" class="card border-dark border-2 shadow-sm">
+                    <div id="card5" class="card border-2">
                         <div class="card-body text-center">
+                            <h1 id="card5iconC" class="d-none"><i class="bi bi-check"></i></h1>
                             <div id="card5iconA" class="h1 my-4 d-none display-1">
                                 <i class="bi bi-alarm"></i>
                             </div>
                             <div id="card5iconB" class="h1 mt-4 mb-3 d-none">
                                 <i class="bi bi-clock"></i>
                             </div>
-                            <h3 class="card-title mt-3">Isha</h3>
+                            <h3 class="card-title mt-3 mb-2">Isha</h3>
                             <h3 class="card-title mb-5">عشاء</h3>
-                            <h2 id="Isha" class="card-text my-3"></h2>
+                            <div class="container d-flex flex-row justify-content-around">
+                                <h2 id="Isha" class="card-text my-3"></h2>
+                                <h2 class=" my-3"><i class="bi bi-moon"></i></h2>
+                            </div>
                             <!-- <button class="btn btn-outline-dark my-3">Discover</button> -->
                         </div>
                     </div>
@@ -149,19 +175,8 @@
             </div>
         </div>
 
-        <div class="container py-3">
-            <h1 id="place" class="text-dark text-center fs-5">...</h1>
-        </div>
-    </section>
-
-    <section class="bg-black p-4 text-light position-sticky mt-5 bottom-0 w-100 d-none">
-        <div class="container">
-            <div class="d-flex justify-content-center gap-5 align-items-center ">
-                <h2 class="text-capitalize fs-4">Show Prayer Time From Your Location</h1>
-                <div>
-                    <button type="button" id="location" class="btn btn-outline-light btn-lg">Press Here!</button>
-                </div>
-            </div>
+        <div class="container py-3 bottom-0">
+            <h1 id="place" class="text-center fs-5">...</h1>
         </div>
     </section>
 </body>

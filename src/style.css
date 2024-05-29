@@ -1,27 +1,62 @@
-.float{
-    animation: floating 5s ease-in-out infinite;
-    will-change: transform;
+:root{
+    --primary: #036C68;
+    --primary-dark: #002425;
+    --secondary: #036C68;
+    --secondary-dark: #153f3e;
+}
 
+.primary-dark{
+    background-color: var(--primary-dark);
+}
+
+.primary{
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+.secondary{
+    background-color: var(--secondary);
+}
+
+.secondary-dark{
+    background-color: var(--secondary-dark);
+}
+
+.border-secondary-custom{
+    /* border-color: rgba(0, 0, 0, 0); */
+    border-color: rgba(0, 0, 0, 0.175);
+}
+
+.float{
+    z-index: 2;
+    animation: floating 1.5s ease-in-out infinite;
+    will-change: transform;
+    /* border-radius: 20px; */
     /* transform: translate(-50%,); */
 }
 
 .delay{
-    animation-delay: 800ms;
+    animation-delay: 200ms;
 }
 
 .garamond{
     font-family: "EB Garamond", "Reem Kufi";
 }
 
+.card{
+    /* border-radius: 10px; */
+    transform-origin: center;
+    /* box-shadow: 0px 0px 10px white; */
+}
 
 @keyframes floating{
     0%{
-        transform: translateY(0);
+        transform: translateY(0) scale(1.03);
     }
     50% {
-        transform: translateY(-5%);
+        transform: translateY(-0) scale(1.01);
     }
-    100% {
-        transform: translateY(0);
+    100%, 75%{
+        transform: translateY(0) scale(1.03);
     }
 }
