@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en" class="h-100"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +7,11 @@
     <meta name="description" content=" Get accurate prayer times for your region with our simple and efficient tool. Easy access, designed for simplicity and effectiveness. Stay connected to faith. ">
     <title>PrayerTime.</title>
 
-    <script src="../howler/dist/howler.js"></script>
-    <script type="module" src="prayers.js"></script>
+    <!-- <script type="module" src="src/prayers.js"></script> -->
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="src/home.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,11 +50,70 @@
             </a>
         </div>
     </nav>
-    <section class="p-5 my-3 my-5 h-100">
-        <div class="container">
-            <h1 class="mb-4">This is the Home Page!</h1>
-            <h2 class="mb-5">Work In Progress..</h2>
-            <h3>Go to the <a class="text-decoration-none pt-2 pb-3 border-0 primary mx-2 btn-light btn fw-bold fs-1 text-white" href="src/prayers.html">Prayers</a> page to see live prayer times.</h3>
+    <section class="p-5 my-3 my-5 justify-content-center d-flex">
+        <div class="container h-100 d-flex row text-center justify-content-center h-100">
+            <div class="container d-flex justify-content-center mb-5">
+                <img class="" src="brr-big.png" alt="">
+            </div>
+
+            <div class="pt-3 container d-flex row justify-content-around my-5 gap-5 h-100">
+
+                <div class="col-md">
+                    <div id="card1" class="card border-secondary-custom border-2">
+                        <div class="card-body d-flex justify-content-around align-items-center">
+
+                            <div class="my-4">
+                                <h3 class="card-title mt-3 mb-4">Prayers</h3>
+                                <h3 class="card-title mb-4">الصلاة</h3>
+                                <div class="container d-flex flex-row justify-content-around">
+                                    <h2 id="Fajr" class="card-text"></h2>
+                                </div>
+    
+                                <h5 class="" >get live prayer times.</h5>
+                            </div>
+                           
+                            <div>
+
+                                <a href="src/prayers.html">
+                                    <button class="btn btn-color-primary btn-lg my-3">
+                                        <b>Enter</b>  <i class="bi ms-2 bi-arrow-right"></i>
+                                    </button>
+                                </a>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div id="card1" class="card border-secondary-custom border-2">
+                        <div class="card-body d-flex justify-content-around align-items-center">
+
+                            <div class="my-4">
+                                <h3 class="card-title mt-3 mb-4">Coming soon</h3>
+                                <h3 class="card-title mb-4">قريباً</h3>
+    
+                                <div class="container d-flex flex-row justify-content-around">
+                                    <h2 id="Fajr" class="card-text"></h2>
+                                </div>
+
+                                <h5>more pages coming soon.</h5>
+                            </div>
+
+                            <div>
+                                
+                                <a href="">
+                                    <button class="btn btn-color-primary btn-lg btn-outline-dark my-3">
+                                        <b>Coming Soon</b>  <i class="bi ms-2 bi-arrow-right"></i>
+                                    </button>
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 </body>

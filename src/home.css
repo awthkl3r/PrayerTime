@@ -1,0 +1,6 @@
+img{
+    filter:invert(1) sepia(100%) saturate(500%) hue-rotate(95deg) brightness(0.6);
+    /* color: red; */
+    max-width: 500px;
+    min-width: 300px;
+}
