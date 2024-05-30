@@ -346,7 +346,7 @@ function step(){
 		}
 	}
 	if((city == null || country == null) && count == 2){
-		warningText.innerText = "Please Press The Button Below To Get Your Prayer Times."
+		warningText.innerText = "Couldnt access location. Please give permissions enable cookies!"
 	}
 	else{
 		warningText.innerText = " "
