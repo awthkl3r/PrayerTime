@@ -346,7 +346,8 @@ function step(){
 		}
 	}
 	if((city == null || country == null) && count == 2){
-		warningText.innerText = "Couldnt access location. Please give permissions enable cookies!"
+		warningText.innerText = "Couldnt access location. Please give location permissions, and enable cookies!"
+		alert("Couldnt access location. Please give location permissions, and enable cookies!")
 	}
 	else{
 		warningText.innerText = " "
