@@ -41,50 +41,74 @@
 </head>
 <body class="overflow-x-hidden garamond primary-dark text-white ">
     <nav class="navbar primary d-flex flex-nowrap">
-        <div class=" col container justify-content-center px-5">
+
+        <div class=" col container justify-content-center flex-grow-0">
             <a class="navbar-brand px-5" href="../index.html">
-                <h1 class="text-white">Prayertime.</h1>
+                <h1 class="text-white px-5">Prayertime.</h1>
             </a>
-        </div>
-        <div class="container d-flex justify-content-center gap-5">
-            
-    
-            <div class="d-flex gap-2 primary-dark p-3 rounded-2 align-items-center">
-                <input class="form-control" type="text" id="country" placeholder="Country">
-                <input class="form-control" type="text" id="city" placeholder="City">
-                <button type="button" id="enterLocation" class="btn btn-outline-light">Enter</button>
-                <p class="text-white m-0">OR</p>
-                <button type="button" id="location" class="btn btn-outline-light">Detect</button>
-            </div>
-
-            <div class="dropdown d-flex gap-2 primary-dark p-3 rounded-2">
-                <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Muslim World League
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li class="dropdown-item">University of Islamic Sciences, Karachi</li>
-                  <li class="dropdown-item">Islamic Society of North America (ISNA)</li>
-                  <li class="dropdown-item">Muslim World League</li>
-                  <li class="dropdown-item">Umm Al-Qura University, Makkah</li>
-                  <li class="dropdown-item">Egyptian General Authority of Survey</li>
-                  <li class="dropdown-item">Institute of Geophysics, University of Tehran</li>
-                  <li class="dropdown-item">Gulf Region/li> 
-                  <li class="dropdown-item">Kuwait</li>
-                  <li class="dropdown-item">Qatar</li>
-                </ul>
-
-                <div>
-                    <button type="button" id="reset" class="btn btn-outline-light">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                    </button>
-                </div>
-            </div>
 
             <a class="nav-item text-decoration-none btn px-3" href="../index.html">
-                <h3 class="text-white m-0 px-5">Home</h3> 
+                <h3 class="text-white m-0">Home</h3> 
             </a>
+        </div>
+        <div class=" col container justify-content-center px-5 flex-grow-1">
+            
+
+            
+
+            <div class="container d-flex justify-content-center gap-5 d-none" id="menu"> 
+                <!-- d-lg-flex -->
+        
+                <div class="d-flex gap-2 primary-dark p-3 rounded-2 align-items-center">
+                    <input class="form-control" type="text" id="country" placeholder="Country">
+                    <input class="form-control" type="text" id="city" placeholder="City">
+                    <button type="button" id="enterLocation" class="btn btn-outline-light">Enter</button>
+                    <p class="text-white m-0">OR</p>
+                    <button type="button" id="location" class="btn btn-outline-light">Detect</button>
+                </div>
+    
+                <div class="dropdown d-flex gap-2 primary-dark p-3 rounded-2">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Muslim World League
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li class="dropdown-item">University of Islamic Sciences, Karachi</li>
+                      <li class="dropdown-item">Islamic Society of North America (ISNA)</li>
+                      <li class="dropdown-item">Muslim World League</li>
+                      <li class="dropdown-item">Umm Al-Qura University, Makkah</li>
+                      <li class="dropdown-item">Egyptian General Authority of Survey</li>
+                      <li class="dropdown-item">Institute of Geophysics, University of Tehran</li>
+                      <li class="dropdown-item">Gulf Region/li> 
+                      <li class="dropdown-item">Kuwait</li>
+                      <li class="dropdown-item">Qatar</li>
+                    </ul>
+    
+                    <div>
+                        <button type="button" id="reset" class="btn btn-outline-light">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        </button>
+                    </div>
+                    
+                </div>  
+            </div>
+
+            
             
         </div>
+        
+        
+        <div class=" col container justify-content-center flex-grow-0 px-5 ">
+            <div class="px-5">
+                <button type="button" id="menuToggle" class="btn btn-outline-light btn-lg ms-5 d-none d-lg-flex ">
+                    <i class="bi bi-list"></i>
+                    <!-- <p id="menuToggleText"></p> -->
+                </button>  
+            </div>
+            
+        </div>
+
+        
+        
             
     </nav>
 
@@ -242,6 +266,27 @@
         // Access the chosen item from local storage
         var storedItem = localStorage.getItem('chosenItem');
         // console.log('Stored Item:', storedItem);
+
+        let toggleBtn = document.getElementById("menuToggle");
+        let toggleText = document.getElementById("menuToggleText");
+        let toggled = false
+
+        let menu = document.getElementById("menu")
+
+        toggleBtn.addEventListener("click", toggle)
+
+        function toggle(){
+            if(toggled){
+                // toggleBtn.classList.add("rotate")
+                menu.classList.add("d-none")
+                toggled = false
+            }else{
+                // toggleBtn.classList.remove("rotate")
+                menu.classList.remove("d-none")
+                toggled = true
+            }
+            // toggleText.innerText = toggled ? "Hide Menu" : "Show Menu"
+        }
     </script>
 </body>
 </html>
