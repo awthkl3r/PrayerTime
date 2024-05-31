@@ -31,27 +31,60 @@ const dateTextAr = document.getElementById("date-ar")
 const timeTextAr = document.getElementById("time-ar")
 const warningText = document.getElementById("warning")
 const placeText = document.getElementById("place")
-const card1 = document.getElementById("card1")
-const card2 = document.getElementById("card2")
-const card3 = document.getElementById("card3")
-const card4 = document.getElementById("card4")
-const card5 = document.getElementById("card5")
-const card1iconA = document.getElementById("card1iconA")
-const card2iconA = document.getElementById("card2iconA")
-const card3iconA = document.getElementById("card3iconA")
-const card4iconA = document.getElementById("card4iconA")
-const card5iconA = document.getElementById("card5iconA")
-const card1iconB = document.getElementById("card1iconB")
-const card2iconB = document.getElementById("card2iconB")
-const card3iconB = document.getElementById("card3iconB")
-const card4iconB = document.getElementById("card4iconB")
-const card5iconB = document.getElementById("card5iconB")
-const card1iconC = document.getElementById("card1iconC")
-const card2iconC = document.getElementById("card2iconC")
-const card3iconC = document.getElementById("card3iconC")
-const card4iconC = document.getElementById("card4iconC")
-const card5iconC = document.getElementById("card5iconC")
+
+const dropdown = document.getElementById("dropdownMenuButton1")
+
 const locationBtn = document.getElementById("location")
+
+
+
+const enterLocationBtn = document.getElementById("enterLocation")
+const countryInput = document.getElementById("country")
+const cityInput = document.getElementById("city")
+
+let cityInputText = localStorage.getItem("cityInputText") || countryInput.value
+let countryInputText = localStorage.getItem("countryInputText") || cityInput.value
+
+countryInput.addEventListener("change", ()=>{ 
+	// countryInput.value
+	countryInputText = countryInput.value
+})
+cityInput.addEventListener("change", ()=>{ 
+	// cityInput.value
+	cityInputText = cityInput.value
+})
+
+const cards = [
+	document.getElementById("card1"), 
+	document.getElementById("card2"), 
+	document.getElementById("card3"), 
+	document.getElementById("card4"), 
+	document.getElementById("card5")
+]
+
+const cardiconsA = [
+	document.getElementById("card1iconA"), 
+	document.getElementById("card2iconA"), 
+	document.getElementById("card3iconA"), 
+	document.getElementById("card4iconA"), 
+	document.getElementById("card5iconA")
+]
+
+const cardiconsB = [
+	document.getElementById("card1iconB"), 
+	document.getElementById("card2iconB"), 
+	document.getElementById("card3iconB"), 
+	document.getElementById("card4iconB"), 
+	document.getElementById("card5iconB")
+]
+
+const cardiconsC = [
+	document.getElementById("card1iconC"), 
+	document.getElementById("card2iconC"), 
+	document.getElementById("card3iconC"), 
+	document.getElementById("card4iconC"), 
+	document.getElementById("card5iconC")
+]
 
 let data 
 let geo
@@ -60,6 +93,8 @@ let hours = date.getHours()
 let minutes = date.getMinutes()
 let seconds = date.getSeconds()
 let date_formatted = `${month}/${day}/${year} \n \n ${hours >= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}:${seconds <= 9 ? 0 + seconds.toString() : seconds} `
+
+let useText = false
 
 const x = document.getElementById("demo");
 let lat
@@ -74,7 +109,7 @@ var sound = new Howl({
 });
 
 async function getDate(){
-	fetch('https://api.aladhan.com/v1/gToH/' + (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear())
+	fetch('https://api.aladhan.com/v1/gToH/' + date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear())
 		.then(response => response.json())
 		.then(data => {
 			const hijriDate = data.data.hijri;
@@ -86,7 +121,7 @@ async function getDate(){
 			// Convert Hijri day and year to Arabic numerals
 			const arabicHijriDay = String(hijriDay).split('').map(digit => arabicNumerals[digit]).join('');
 			const arabicHijriYear = String(hijriYear).split('').map(digit => arabicNumerals[digit]).join('');
-			const arabicHours = hours <= 12 ? String(hours).split('').map(digit => arabicNumerals[digit]).join('') : String(hours-12).split('').map(digit => arabicNumerals[digit]).join('')
+			const arabicHours = hours === 0 ? '١٢' : (hours <= 12 ? String(hours).split('').map(digit => arabicNumerals[digit]).join('') : String(hours-12).split('').map(digit => arabicNumerals[digit]).join(''))
 			const arabicMinutes = (minutes <= 9 ? (0 + String(minutes)).split('').map(digit => arabicNumerals[digit]).join('') : String(minutes).split('').map(digit => arabicNumerals[digit]).join('')) 
 			// Display Hijri date with Arabic numerals
 			dateTextAr.innerText = `${arabicHijriDay} ${lunarMonthsAr[hijriMonth]} ${arabicHijriYear} هـ`;
@@ -100,11 +135,22 @@ async function getDate(){
 }
 
 function getLocation() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition);
-	} else {
-		console.log('not supported')
+	if((cityInputText == null || countryInputText == null) || (cityInputText == "" || countryInputText == "") || (cityInputText == " " || countryInputText == " ") && !useText) {
+		// console.log(countryInputText, cityInputText)
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		} else if(useText) {
+			console.log('not supported')
+		}
 	}
+	else{
+		// console.log("else")
+		city = cityInputText
+		country = countryInputText
+		// console.log(countryInputText, cityInputText)
+		getPrayers()
+	}
+	
 }
 async function showPosition(position) {	
 	lat = position.coords.latitude
@@ -131,6 +177,10 @@ async function showPosition(position) {
 }
 
 locationBtn.addEventListener("click", ()=>{
+	countryInputText = ""
+	cityInputText = ""
+	localStorage.setItem("countryInputText", "")
+	localStorage.setItem("cityInputText", "")
 	getLocation()
 	history.go(0)
 })
@@ -139,21 +189,73 @@ locationBtn.addEventListener("touchstart", ()=>{
 	history.go(0)
 }) 	
 
+enterLocationBtn.addEventListener("click", ()=>{
+	countryInputText = countryInput.value
+	cityInputText = cityInput.value
+	
+	localStorage.setItem("countryInputText", countryInputText)
+	localStorage.setItem("cityInputText", cityInputText)
+
+	getLocation()
+	history.go(0)
+})
+
 let prayerTimes
 let prayers
 
 let finalTime
 let newPrayers = []
 
+let methodName = dropdown.textContent
+let method = null
+
+switch(methodName){
+	case "University of Islamic Sciences, Karachi":
+		method = 1
+		break
+
+	case "Islamic Society of North America (ISNA)":
+		method = 2
+		break
+
+	case "Muslim World League":
+		method = 3
+		break
+
+	case "Umm Al-Qura University, Makkah":
+		method = 4
+		break
+
+	case "Egyptian General Authority of Survey":
+		method = 5
+		break
+
+	case "Institute of Geophysics, University of Tehran":
+		method = 7
+		break
+
+	case "Gulf Region":
+		method = 8
+		break
+
+	case "Kuwait":
+		method = 9
+		break
+
+	case "Qatar":
+		method = 10
+		break
+}
+
 async function getPrayers(){
 	// getLocation()
-	const url = `https://api.aladhan.com/v1/timingsByCity/${day}-${month}-${year}?city=${city}&country=${country}&method=4&adjustment=1`;
+	const url = `https://api.aladhan.com/v1/timingsByCity/${day}-${month}-${year}?city=${city}&country=${country}&method=${method}&adjustment=1`;
 	try {
 		const response1 = await fetch(url);
 		const result1 = await response1.text();
 	
 		data = JSON.parse(result1);
-		// console.log(data.data.timings)
+
 		prayerTimes = data.data.timings
 
 		prayers = [prayerTimes.Fajr, prayerTimes.Dhuhr, prayerTimes.Asr, prayerTimes.Maghrib, prayerTimes.Isha]
@@ -176,10 +278,7 @@ async function getPrayers(){
 	}
 }
 
-const cards = [card1, card2, card3, card4, card5]
-const cardiconsA = [card1iconA, card2iconA, card3iconA, card4iconA, card5iconA]
-const cardiconsB = [card1iconB, card2iconB, card3iconB, card4iconB, card5iconB]
-const cardiconsC = [card1iconC, card2iconC, card3iconC, card4iconC, card5iconC]
+
 
 function parseTime(timeStr) {
 	const [hours, minutes] = timeStr.split(":").map(Number);
@@ -217,9 +316,16 @@ function findClosestTime(times, target) {
 }
 
 function step(){
+	// getLocation()
+	// getPrayers
+	placeText.innerText = `${city}, ${country}`
+
+
 	getDate()
 	if(count < 1){
 		getLocation()
+		placeText.innerText = `${city}, ${country}`
+
 	}
 	
 	date = new Date()
@@ -246,10 +352,9 @@ function step(){
 
 	if (city != null && country != null && count > 0){
 		for (let i = 0; i < prayers.length; i++){
-			// console.log(prayers[i])
+
 			if(`${hours}:${minutes}` == prayers[i]){
 				sound.play()
-				console.log("Prayer Time")
 				break
 			}
 			if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
