@@ -273,20 +273,52 @@
 
         let menu = document.getElementById("menu")
 
-        toggleBtn.addEventListener("click", toggle)
+        toggleBtn.addEventListener("click", ()=>{
+            toggle(toggled)
+        })
 
-        function toggle(){
-            if(toggled){
+        function toggle(_toggled){
+            if(_toggled){
                 // toggleBtn.classList.add("rotate")
                 menu.classList.add("d-none")
-                toggled = false
+                _toggled = false
             }else{
                 // toggleBtn.classList.remove("rotate")
                 menu.classList.remove("d-none")
-                toggled = true
+                
+                _toggled = true
             }
+            toggled = _toggled
             // toggleText.innerText = toggled ? "Hide Menu" : "Show Menu"
         }
+
+
+        // Function to hide/show navbar elements based on screen size
+        function toggleNavbarElements() {
+            // Get the container holding navbar elements
+            var navbarContent = document.getElementById("navbarContent");
+            if (window.innerWidth < 768) {
+                // Hide elements on small screens
+                // navbarContent.querySelectorAll(".menu").forEach(function(element) {
+                //     element.style.display = "none";
+                // });
+
+                toggle(true)
+            } else {
+                // Show elements on larger screens
+                // navbarContent.querySelectorAll(".menu").forEach(function(element) {
+                //     element.style.display = "flex"; 
+                // });
+
+                toggle(true)
+            }
+        }
+
+        // Initial call to set navbar elements visibility on page load
+        toggleNavbarElements();
+
+        // Listen for window resize events to dynamically adjust navbar elements visibility
+        window.addEventListener("resize", toggleNavbarElements);
     </script>
 </body>
 </html>
