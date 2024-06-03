@@ -89,6 +89,8 @@ const cardiconsC = [
 let data 
 let geo
 
+console.log(date)
+
 let hours = date.getHours()
 let minutes = date.getMinutes()
 let seconds = date.getSeconds()
@@ -213,7 +215,7 @@ switch(methodName){
 	case "University of Islamic Sciences, Karachi":
 		method = 1
 		break
-
+ 
 	case "Islamic Society of North America (ISNA)":
 		method = 2
 		break

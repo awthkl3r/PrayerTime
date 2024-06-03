@@ -53,14 +53,14 @@
     <section class="p-5 my-3 my-5 justify-content-center d-flex">
         <div class="container h-100 d-flex row text-center justify-content-center h-100">
             <div class="container d-flex justify-content-center mb-5">
-                <img class="" src="brr-big.png" alt="">
+                <img class="brr" src="brr-big.png" alt="">
             </div>
 
             <div class="pt-3 container d-flex row justify-content-around my-5 gap-5 h-100">
 
                 <div class="col-md">
                     <div id="card1" class="card border-secondary-custom border-2">
-                        <div class="card-body d-flex justify-content-around align-items-center">
+                        <div class="card-body d-flex flex-column flex-lg-row  justify-content-around align-items-center">
 
                             <div class="my-4">
                                 <h3 class="card-title mt-3 mb-4">Prayers</h3>
@@ -87,34 +87,94 @@
 
                 <div class="col-md">
                     <div id="card1" class="card border-secondary-custom border-2">
-                        <div class="card-body d-flex justify-content-around align-items-center">
+                        <div class="card-body d-flex flex-column flex-lg-row justify-content-around align-items-center">
 
                             <div class="my-4">
-                                <h3 class="card-title mt-3 mb-4">Coming soon</h3>
-                                <h3 class="card-title mb-4">قريباً</h3>
+                                <h3 class="card-title mt-3 mb-4">Learn To Pray</h3>
+                                <h3 class="card-title mb-4">تعلم الصلاة</h3>
     
                                 <div class="container d-flex flex-row justify-content-around">
                                     <h2 id="Fajr" class="card-text"></h2>
                                 </div>
 
-                                <h5>more pages coming soon.</h5>
+                                <h5>Learn to perform the daily prayers.</h5>
                             </div>
 
                             <div>
                                 
-                                <a href="">
+                                <a href="src/learn.html">
                                     <button class="btn btn-color-primary btn-lg btn-outline-dark my-3">
-                                        <b>Coming Soon</b>  <i class="bi ms-2 bi-arrow-right"></i>
+                                        <b>Learn</b>  <i class="bi ms-2 bi-arrow-right"></i>
                                     </button>
                                 </a>
                                 
                             </div>
                         </div>
                     </div>
+                    
                 </div>
 
+                <div class="container mt-2 object-fit-scale">
+                    <h1 class="color-primary amiri mt-5 lh-nice" id="verse"></h1>
+                    <h4 class="color-primary amiri lh-nice" id="verse-en"></h4>
+                    <h3 class="color-primary lh-nice" id="verse-number"></h3>
+                </div>
             </div>
         </div>
     </section>
+
+
+    <script>
+        var arabicNormChar = {
+            'ك': 'ک', 'ﻷ': 'لا', 'ؤ': 'و', 'ى': 'ی', 'ي': 'ی', 'ئ': 'ی', 'أ': 'ا', 'إ': 'ا', 'آ': 'ا', 'ٱ': 'ا', 'ٳ': 'ا', 'ة': 'ه', 'ء': '', 'ِ': '', 'ْ': '', 'ُ': '', 'َ': '', 'ّ': '', 'ٍ': '', 'ً': '', 'ٌ': '', 'ٓ': '', 'ٰ': '', 'ٔ': '', '�': ''
+        }
+
+        let quran = null
+
+        var simplifyArabic  = function (str) {
+            return str.replace(/[^\u0000-\u007E]/g, function(a){ 
+                var retval = arabicNormChar[a]
+                if (retval == undefined) {retval = a}
+                return retval; 
+            }).normalize('NFKD').toLowerCase();
+        }
+
+        const verse = document.getElementById("verse")
+        const verseEn = document.getElementById("verse-en")
+        const verseNum = document.getElementById("verse-number")
+
+        fetch('quran.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                quran = data
+
+                fetchquran()
+            });
+
+        function fetchquran(){
+            let rand = Math.floor((Math.random() * 114)+1)
+            let rand2 = Math.floor((Math.random() * 6)+2)
+
+            for (let i = 0; i < quran.length; i++){
+                
+                if(quran[i].surah_number == rand){
+                    if(quran[i].verse_number == rand2){
+                        let isShort = (simplifyArabic(quran[i].text).split(' ').length) <= 6
+                        if(isShort){
+                            verse.innerText = `( ${quran[i].text} )`
+                            verseEn.innerText = `~ ${quran[i].translation} ~`
+                            verseNum.innerText = `${quran[i].verse_number} : ${quran[i].surah_number}`
+                            console.log(quran[i])
+                        }
+                        else{
+                            fetchquran()
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>

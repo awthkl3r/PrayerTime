@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 :root{
     --primary: #036C68;
     --primary-dark: #002425;
@@ -177,4 +179,12 @@
     background-color: transparent;
     border: 2px solid var(--primary);
     color: var(--primary);
+}
+
+.amiri{
+    font-family: 'amiri';
+}
+
+.lh-nice{
+    line-height: 2;
 }
