@@ -154,6 +154,7 @@
             });
 
         function fetchquran(){
+            // console.log("hi")
             let rand = Math.floor((Math.random() * 114)+1)
             let rand2 = Math.floor((Math.random() * 6)+2)
 
@@ -161,16 +162,20 @@
                 
                 if(quran[i].surah_number == rand){
                     if(quran[i].verse_number == rand2){
-                        let isShort = (simplifyArabic(quran[i].text).split(' ').length) <= 6
-                        if(isShort){
-                            verse.innerText = `( ${quran[i].text} )`
-                            verseEn.innerText = `~ ${quran[i].translation} ~`
-                            verseNum.innerText = `${quran[i].verse_number} : ${quran[i].surah_number}`
-                            console.log(quran[i])
+                        if (quran[i] != null){
+                            let isShort = (simplifyArabic(quran[i].text).split(' ').length) <= 6
+                            if(isShort){
+                                verse.innerText = `( ${quran[i].text} )`
+                                verseEn.innerText = `~ ${quran[i].translation} ~`
+                                verseNum.innerText = `${quran[i].surah_number} : ${quran[i].verse_number}`
+                                console.log(quran[i])
+                            }
+                            else{
+                                console.log("no")
+                                fetchquran()
+                            }
                         }
-                        else{
-                            fetchquran()
-                        }
+                        
                     }
                 }
             }
