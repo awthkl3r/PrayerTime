@@ -63,7 +63,7 @@
         transform: translateY(0) scale(1.03);
     }
     50% {
-        transform: translateY(-0) scale(1.01);
+        transform: translateY(-0) scale(1.00);
     }
     100%, 75%{
         transform: translateY(0) scale(1.03);

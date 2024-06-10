@@ -31,6 +31,7 @@ const dateTextAr = document.getElementById("date-ar")
 const timeTextAr = document.getElementById("time-ar")
 const warningText = document.getElementById("warning")
 const placeText = document.getElementById("place")
+// const timeLeftText = document.getElementById("timetext")
 
 const dropdown = document.getElementById("dropdownMenuButton1")
 
@@ -62,6 +63,14 @@ const cards = [
 	document.getElementById("card5")
 ]
 
+const timeLeftTexts = [
+	document.getElementById("timetext1"), 
+	document.getElementById("timetext2"), 
+	document.getElementById("timetext3"), 
+	document.getElementById("timetext4"), 
+	document.getElementById("timetext5")
+]
+
 const cardiconsA = [
 	document.getElementById("card1iconA"), 
 	document.getElementById("card2iconA"), 
@@ -89,7 +98,7 @@ const cardiconsC = [
 let data 
 let geo
 
-console.log(date)
+// console.log(date)
 
 let hours = date.getHours()
 let minutes = date.getMinutes()
@@ -110,6 +119,54 @@ var sound = new Howl({
 	src: ['../athan.mp3']
 });
 
+function timeLeft(currentTime, targetTime) {
+    // Parse the current time
+    const [currentHours, currentMinutes] = currentTime.split(':').map(Number);
+    const currentDate = new Date();
+    currentDate.setHours(currentHours, currentMinutes, 0, 0);
+
+    // Parse the target time
+    const [targetHours, targetMinutes] = targetTime.split(':').map(Number);
+    const targetDate = new Date();
+    targetDate.setHours(targetHours, targetMinutes, 0, 0);
+
+    // Calculate the difference in milliseconds
+    let diff = targetDate - currentDate;
+
+    // If the target time is earlier than the current time, assume it's the next day
+    if (diff < 0) {
+        targetDate.setDate(targetDate.getDate() + 1);
+        diff = targetDate - currentDate;
+    }
+
+    // Convert the difference to hours and minutes
+    let totalMinutesLeft = Math.floor(diff / (1000 * 60));
+    let hoursLeft = Math.floor(totalMinutesLeft / 60);
+    let minutesLeft = totalMinutesLeft % 60;
+
+    // Convert hours to 12-hour format
+    if (hoursLeft >= 12) {
+        hoursLeft -= 12;
+    }
+
+    // Create the formatted result
+    const hoursText = hoursLeft > 0 ? `${hoursLeft} hour${hoursLeft > 1 ? 's' : ''}` : '';
+    const minutesText = minutesLeft > 0 ? `${minutesLeft} Minute${minutesLeft > 1 ? 's' : ''}` : '';
+    
+    // Combine hours and minutes text
+    let result = '';
+    if (hoursText && minutesText) {
+        result = `${hoursText}, \n ${minutesText}`;
+    } else if (hoursText) {
+        result = `${hoursText}`;
+    } else if (minutesText) {
+        result = `${minutesText}`;
+    } else {
+        result = '0 Minutes';
+    }
+
+    return result;
+}
 async function getDate(){
 	fetch('https://api.aladhan.com/v1/gToH/' + date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear())
 		.then(response => response.json())
@@ -350,7 +407,7 @@ function step(){
 	}
 
 	dateText.innerText = `${day}${daySuffix} of ${months[month - 1]}, ${year}`
-	timeText.innerText = `${hours <= 12 ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
+	timeText.innerText = `${(hours <= 12 && hours != 0) ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`
 
 	if (city != null && country != null && count > 0){
 		for (let i = 0; i < prayers.length; i++){
@@ -360,6 +417,10 @@ function step(){
 				break
 			}
 			if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
+				timeLeftTexts[i].innerText = timeLeft(`${(hours <= 12 && hours != 0) ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`, findClosestTime(prayers, `${hours}:${minutes}`, prayers[i]))
+				if (timeLeftTexts[i+1] !==null){
+					timeLeftTexts[i+1].innerText = timeLeft(`${(hours <= 12 && hours != 0) ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`, prayers[i+1])
+				}
 				
 				if(cards[i+1] != null && cardiconsB[i+1] != null){
 					
@@ -442,6 +503,10 @@ function step(){
 				}
 			}
 			if(prayers[i] > findClosestTime(prayers, `${hours}:${minutes}`)){
+				
+				// console.log(timeLeft(`${(hours <= 12 && hours != 0) ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`, findClosestTime(prayers, `${hours}:${minutes}`, prayers[i])))
+				// timeLeftTexts[i].innerText = timeLeft(`${(hours <= 12 && hours != 0) ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`, findClosestTime(prayers, `${hours}:${minutes}`, prayers[i]))
+				
 				if(
 					!cardiconsC[i].classList.contains("d-none") &&
 					cards[i].classList.contains("past")
@@ -449,6 +514,8 @@ function step(){
 					cardiconsC[i].classList.add("d-none")
 					cards[i].classList.remove("past")
 				}
+
+
 			}
 		}
 	}

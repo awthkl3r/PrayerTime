@@ -49,10 +49,6 @@
             <a class="navbar-brand px-5" href="../index.html">
                 <h1 class="text-white px-5">Prayertime.</h1>
             </a>
-
-            <a class="nav-item text-decoration-none btn px-3" href="../index.html">
-                <h3 class="text-white m-0">Home</h3> 
-            </a>
         </div>
         <div class=" col container justify-content-center flex-grow-0 flex-lg-grow-1">
             <div class="container d-flex justify-content-center gap-5 d-none" id="menu"> 
@@ -137,7 +133,8 @@
                             </div>
                             <h3 class="card-title mt-3 mb-2">Fajr</h3>
                             <h3 class="card-title mb-5">فجر</h3>
-                            <div class="container d-flex flex-row justify-content-around">
+                            <h4 id="timetext1" class="card-title mt-3 mb-2"></h2>
+                                <div class="container d-flex flex-row justify-content-around">
                                 <h2 id="Fajr" class="card-text my-3"></h2>
                                 <h2 class=" my-3"><i class="bi bi-sunrise"></i></h2>
                             </div>
@@ -159,6 +156,7 @@
                             </div>
                             <h3 class="card-title mt-3 mb-2">Dhuhr</h3>
                             <h3 class="card-title mb-5">ظهر</h3>
+                            <h4 id="timetext2" class="card-title mt-3 mb-2"></h4>
                             <div class="container d-flex flex-row justify-content-around">
                                 <h2 id="Dhuhr" class="card-text my-3"></h2>
 
@@ -181,6 +179,7 @@
                             </div>
                             <h3 class="card-title mt-3 mb-2">Asr</h3>
                             <h3 class="card-title mb-5">عصر</h3>
+                            <h4 id="timetext3" class="card-title mt-3 mb-2"></h4>
                             <div class="container d-flex flex-row justify-content-around">
                                 <h2 id="Asr" class="card-text my-3"></h2>
                                 <h2 class=" my-3"><i class="bi bi-cloud-sun"></i></h2>
@@ -202,6 +201,7 @@
                             </div>
                             <h3 class="card-title mt-3 mb-2">Maghrib</h3>
                             <h3 class="card-title mb-5">مغرب</h3>
+                            <h4 id="timetext4" class="card-title mt-3 mb-2"></h4>
                             <div class="container d-flex flex-row justify-content-around">
                                 <h2 id="Maghrib" class="card-text my-3"></h2>
                                 <h2 class=" my-3"><i class="bi bi-sunset"></i></h2>
@@ -223,6 +223,7 @@
                             </div>
                             <h3 class="card-title mt-3 mb-2">Isha</h3>
                             <h3 class="card-title mb-5">عشاء</h3>
+                            <h4 id="timetext5" class="card-title mt-3 mb-2"></h4>
                             <div class="container d-flex flex-row justify-content-around">
                                 <h2 id="Isha" class="card-text my-3"></h2>
                                 <h2 class=" my-3"><i class="bi bi-moon"></i></h2>
@@ -315,6 +316,78 @@
 
         // Listen for window resize events to dynamically adjust navbar elements visibility
         window.addEventListener("resize", toggleNavbarElements);
+
+
+
+
+
+
+
+
+
+
+
+
+        function timeLeft(currentTime, targetTime) {
+            // Parse the current time
+            const [currentHours, currentMinutes] = currentTime.split(':').map(Number);
+            const currentDate = new Date();
+            currentDate.setHours(currentHours, currentMinutes, 0, 0);
+
+            // Parse the target time
+            const [targetHours, targetMinutes] = targetTime.split(':').map(Number);
+            const targetDate = new Date();
+            targetDate.setHours(targetHours, targetMinutes, 0, 0);
+
+            // Calculate the difference in milliseconds
+            let diff = targetDate - currentDate;
+
+            // If the target time is earlier than the current time, assume it's the next day
+            if (diff < 0) {
+                targetDate.setDate(targetDate.getDate() + 1);
+                diff = targetDate - currentDate;
+            }
+
+            // Convert the difference to hours and minutes
+            const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+            // Format the result as "HH:MM"
+            const formattedHours = String(hoursLeft).padStart(2, '0');
+            const formattedMinutes = String(minutesLeft).padStart(2, '0');
+
+            return `${formattedHours}:${formattedMinutes}`;
+        }
+
+        // Example usage
+        const currentTime = "6:56";
+        const targetTime = "5:29";
+        // console.log(timeLeft(currentTime, targetTime)); // Output: "02:54"
+
+        function checkTimeStatus(currentTime, targetTime) {
+            // Parse the current time
+            const [currentHours, currentMinutes] = currentTime.split(':').map(Number);
+            const currentDate = new Date();
+            currentDate.setHours(currentHours, currentMinutes, 0, 0);
+
+            // Parse the target time
+            const [targetHours, targetMinutes] = targetTime.split(':').map(Number);
+            const targetDate = new Date();
+            targetDate.setHours(targetHours, targetMinutes, 0, 0);
+
+            // Calculate the difference in milliseconds
+            const diff = targetDate - currentDate;
+
+            // Determine if the target time is in the future or has passed
+            if (diff > 0) {
+                return "not yet";
+            } else {
+                return "passed";
+            }
+        }
+
+        // console.log(checkTimeStatus(currentTime, targetTime))
+
     </script>
 </body>
 </html>
