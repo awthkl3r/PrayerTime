@@ -418,7 +418,7 @@ function step(){
 			}
 			if(prayers[i] == findClosestTime(prayers, `${hours}:${minutes}`)){
 				timeLeftTexts[i].innerText = timeLeft(`${(hours <= 12 && hours != 0) ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`, findClosestTime(prayers, `${hours}:${minutes}`, prayers[i]))
-				if (timeLeftTexts[i+1] !==null){
+				if (timeLeftTexts[i+1] != null){
 					timeLeftTexts[i+1].innerText = timeLeft(`${(hours <= 12 && hours != 0) ? hours : hours-12}:${minutes <= 9 ? 0 + minutes.toString() : minutes}`, prayers[i+1])
 				}
 				
