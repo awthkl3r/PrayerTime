@@ -4,3 +4,5 @@ This is one of my first projects I've worked on, and the code may not be very ti
 
  
 This website shows prayer times for muslims around the world, and shows how to pray each prayer.
+
+Also looking forward to forks!
