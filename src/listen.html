@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100vh;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player</title>
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="listen.css">
+    <style>
+        .scrollable-list {
+            padding: 20px;
+            max-height: calc(100vh - 300px); /* Adjust this value as needed */
+            overflow-y: auto;
+            /* overflow-x: auto; */
+        }
+
+
+    </style>
+</head>
+
+<body style="height: 100vh;" class="d-flex flex-column justify-content-between overflow-hidden primary-dark text-white">
+
+    <nav class="navbar primary">
+        <div class=" col container justify-content-center">
+            <a class="navbar-brand" href="../index.html">
+                <h1 class="text-white">Prayertime.</h1>
+            </a>
+        </div>
+        <div class="container col justify-content-center">
+            <div class="dropdown">
+                <button class="btn btn-secondary secondary-dark dropdown-toggle hover-primary" type="button" id="reciterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select Reciter
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="reciterDropdown">
+                    <li><a class="dropdown-item" href="#" data-reciter="1">Reciter 1</a></li>
+                    <li><a class="dropdown-item" href="#" data-reciter="2">Reciter 2</a></li>
+                    <li><a class="dropdown-item" href="#" data-reciter="3">Reciter 3</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="d-flex flex-row justify-content-evenly flex-grow-1">
+        <div class="p-3 d-flex flex-column" style="width: 100%; height: 100%;">
+            
+            <h2 class="text-center">Surah List</h2>
+            <div class="scrollable-list d-flex flex-column">
+                <button id="back-button" class="btn btn-outline-light" style="display: none; transform: scale(0.9);">Back to Surah List</button>
+                <ul class="music-list" id="music-list">
+                    
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="p-3 d-flex flex-column justify-content-around align-items-center" style="width: 100%; height: 100%;">
+            <h2 class="text-center">Quran Player</h2>
+            <p class="text-center">Select a surah from the list to load its verses.</p>
+
+            <div class="d-flex flex-column gap-5 pt-5 justify-content-center align-items-center verse-text">
+                <h4 id="verse-text-arabic" class="text-center amiri fs-2"></h4>
+                <h4 id="verse-text-translation" class="text-center fs-5"></h4>
+
+            </div>
+
+
+
+
+            
+
+            
+        </div>
+    </section>
+
+    <section class="border-danger white sticky-bottom d-flex flex-row justify-content-evenly align-items-center"
+        style="width: 100vw; height: 8vh;">
+        <audio id="audio-player" controls src="https://quranaudio.pages.dev/1/1_20.mp3"></audio>
+        <button id="repeat-btn" class="btn btn-light h-100 rounded-0">
+            <i class="bi bi-repeat"></i>
+        </button>
+    </section>
+
+    <script src="../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="listen.js"></script>
+
+</body>
+
+</html>

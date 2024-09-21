@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root{
+    --primary: #036C68;
+    --primary-dark: #002425;
+    --secondary: #036C68;
+    --secondary-dark: #153f3e;
+}
+
+.primary{
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+.primary-dark{
+    background-color: var(--primary-dark);
+    color: var(--secondary-dark);
+}
+
+.secondary{
+
+    background-color: var(--secondary);
+}
+
+.secondary-dark{
+    background-color: var(--secondary-dark);
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* padding: 20px; */
+    font-family: 'EB Garamond';
+    /* background-color: #111; */
+    color: white;
+
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* gap: 20px; */
+    /* align-items: center;
+    justify-content: center;   */
+}
+
+#music-list {
+    list-style-type: none;
+    /* padding: 0; */
+}
+
+.amiri{
+    font-family: 'amiri';
+}
+
+#music-list li {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: var(--secondary);
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+}
+
+#music-list li:hover {
+    background-color: white;
+    color: #111;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#audio-player {
+    width: 100%;
+    outline: none;
+    background-color: #eee;
+    height: 100%;
+}
+
+#file-input-label {
+    width: 50%;
+    background-color: #eee;
+    color: #111;
+    padding: 0.5rem;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
+    text-align: center;
+    cursor: pointer;
+    height: 100%;
+    border: none;
+    /* margin-top: 1rem; */
+}
+
+#upload-btn {
+    display: none;
+    visibility: hidden;
+    width: 50%;
+    background-color: #eee;
+    color: #111;
+    padding: 0.5rem;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    height: 100%;
+    /* margin-top: 1rem; */
+}
+
+.music-item {
+    position: relative;
+}
+
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.music-item:hover .delete-btn {
+    display: block;
+}
+
+.rename-btn {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.music-item:hover .rename-btn {
+    display: block;
+}
+
+.rename-input {
+    background-color: #eee;
+    color: #111;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-size: 14px;
+    width: 70%;
+}
+
+.rename-done-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.rename-done-btn:hover {
+    background-color: #45a049;
+}
+
+.verse-text {
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    width: 80%;
+}
+
+.hover-primary:hover, .hover-primary:active{
+    background-color: white;
+    color: var(--primary);
+}
+
+.scrollable-list {
+    padding: 20px;
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+}
+
+/* You can add more styles as needed */
+

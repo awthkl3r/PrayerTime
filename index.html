@@ -58,60 +58,81 @@
 
             <div class="pt-3 container d-flex row justify-content-around my-5 gap-5 h-100">
 
-                <div class="col-md">
-                    <div id="card1" class="card border-secondary-custom border-2">
-                        <div class="card-body d-flex flex-column flex-lg-row  justify-content-around align-items-center">
-
-                            <div class="my-4">
-                                <h3 class="card-title mt-3 mb-4">Prayers</h3>
-                                <h3 class="card-title mb-4">الصلاة</h3>
-                                <div class="container d-flex flex-row justify-content-around">
-                                    <h2 id="Fajr" class="card-text"></h2>
+                <div class="container-fluid overflow-auto overflow-lg-visible">
+                    <div class="row flex-nowrap g-5" style="width: 100%; width: 130%;">
+                        <style>
+                            @media (max-width: 992px) {
+                                .row.flex-nowrap.g-5 {
+                                    width: 100% !important;
+                                }
+                            }
+                        </style>
+                        <div class="col-md-4">
+                            <div id="card1" class="card border-secondary-custom border-2">
+                                <div class="card-body d-flex flex-column flex-lg-row  justify-content-around align-items-center">
+                                    <div class="my-4">
+                                        <h3 class="card-title mt-3 mb-4">Prayers</h3>
+                                        <h3 class="card-title mb-4">الصلاة</h3>
+                                        <div class="container d-flex flex-row justify-content-around">
+                                            <h2 id="Fajr" class="card-text"></h2>
+                                        </div>
+                                        <h5 class="" >get live prayer times.</h5>
+                                    </div>
+                                    <div>
+                                        <a href="src/prayers.html">
+                                            <button class="btn btn-color-primary btn-lg my-3">
+                                                <b>Enter</b>  <i class="bi ms-2 bi-arrow-right"></i>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
-    
-                                <h5 class="" >get live prayer times.</h5>
-                            </div>
-                           
-                            <div>
-
-                                <a href="src/prayers.html">
-                                    <button class="btn btn-color-primary btn-lg my-3">
-                                        <b>Enter</b>  <i class="bi ms-2 bi-arrow-right"></i>
-                                    </button>
-                                </a>
-                            </div>
-                           
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md">
-                    <div id="card1" class="card border-secondary-custom border-2">
-                        <div class="card-body d-flex flex-column flex-lg-row justify-content-around align-items-center">
-
-                            <div class="my-4">
-                                <h3 class="card-title mt-3 mb-4">Learn To Pray</h3>
-                                <h3 class="card-title mb-4">تعلم الصلاة</h3>
-    
-                                <div class="container d-flex flex-row justify-content-around">
-                                    <h2 id="Fajr" class="card-text"></h2>
-                                </div>
-
-                                <h5>Learn to perform the daily prayers.</h5>
-                            </div>
-
-                            <div>
-                                
-                                <a href="src/learn.html">
-                                    <button class="btn btn-color-primary btn-lg btn-outline-dark my-3">
-                                        <b>Learn</b>  <i class="bi ms-2 bi-arrow-right"></i>
-                                    </button>
-                                </a>
-                                
                             </div>
                         </div>
+
+                        <div class="col-md-4">
+                            <div id="card1" class="card border-secondary-custom border-2">
+                                <div class="card-body d-flex flex-column flex-lg-row justify-content-around align-items-center">
+                                    <div class="my-4">
+                                        <h3 class="card-title mt-3 mb-4">Learn To Pray</h3>
+                                        <h3 class="card-title mb-4">تعلم الصلاة</h3>
+                                        <div class="container d-flex flex-row justify-content-around">
+                                            <h2 id="Fajr" class="card-text"></h2>
+                                        </div>
+                                        <h5>Learn the daily prayers.</h5>
+                                    </div>
+                                    <div>
+                                        <a href="src/learn.html">
+                                            <button class="btn btn-color-primary btn-lg btn-outline-dark my-3">
+                                                <b>Learn</b>  <i class="bi ms-2 bi-arrow-right"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div id="card1" class="card border-secondary-custom border-2">
+                                <div class="card-body d-flex flex-column flex-lg-row  justify-content-around align-items-center">
+                                    <div class="my-4">
+                                        <h3 class="card-title mt-3 mb-4">Listen to Quran</h3>
+                                        <h3 class="card-title mb-4">استمع للقرآن </h3>
+                                        <div class="container d-flex flex-row justify-content-around">
+                                            <h2 id="Fajr" class="card-text"></h2>
+                                        </div>
+                                        <h5 class="" >listen to the holy quran.</h5>
+                                    </div>
+                                    <div>
+                                        <a href="src/listen.html">
+                                            <button class="btn btn-color-primary btn-lg my-3">
+                                                <b>Listen</b>  <i class="bi ms-2 bi-arrow-right"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
                 </div>
 
                 <div class="container mt-2 object-fit-scale">
