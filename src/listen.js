@@ -18,6 +18,19 @@ const surahListTitle = document.querySelector('.p-3 h2');
 const waveform = document.querySelector('.waveform');
 const audioPlayer = document.getElementById('audio-player');
 
+// Add this near the top of your file with other element selections
+// const loadingAnimation = document.querySelector('.loads');
+
+// // Function to show loading animation
+// function showLoading() {
+//     loadingAnimation.style.display = 'flex';
+// }
+
+// // Function to hide loading animation
+// function hideLoading() {
+//     loadingAnimation.style.display = 'none';
+// }
+
 function updateSelectedReciter(reciter) {
     selectedReciter = reciter;
     const dropdownButton = document.getElementById('reciterDropdown');
@@ -48,6 +61,8 @@ async function fetchQuranVerses() {
     quranVerses = await response.json();
 }
 
+const selectSurahText = document.getElementById('select-surah-text');
+
 const displaySurahList = () => {
     const musicList = document.getElementById('music-list');
     musicList.innerHTML = '';
@@ -67,8 +82,11 @@ const displaySurahList = () => {
     verseTextDiv.style.display = 'none';
     verseTextDiv.style.visibility = 'hidden';
 
+    // Show the "Select a surah" text
+    selectSurahText.style.display = 'block';
+
     // Set the title back to "Surah List"
-    surahListTitle.textContent = 'Surah List';
+    // surahListTitle.textContent = 'Surah List';
 };
 
 let currentChapterIndex = -1;
@@ -85,9 +103,12 @@ async function loadSurahVerses(surahNum, verseCount) {
     verseTextDiv.style.display = 'flex';
     verseTextDiv.style.visibility = 'visible';
 
+    // Hide the "Select a surah" text
+    selectSurahText.style.display = 'none';
+
     // Update the title to the current surah name
     const currentSurah = quranChapters[currentChapterIndex];
-    surahListTitle.textContent = `Playing Surah`;
+    // surahListTitle.textContent = `Playing Surah`;
 
     // Load and display the first verse immediately
     const firstVerseAudio = await getQuranAudio(surahNum, 1);
@@ -148,7 +169,7 @@ const updateActiveMusic = (index) => {
     musicItems.forEach(item => {
         item.classList.remove('active');
         item.style.transform = 'scale(1)';
-        item.style.backgroundColor = '#036C68';
+        item.style.backgroundColor = '#153f3e';
         item.style.color = 'white';
         // item.style.backgroundColor = '#ccc';
 
@@ -158,13 +179,12 @@ const updateActiveMusic = (index) => {
         activeItem.classList.add('active');
         activeItem.style.transform = 'scale(1.05)';
         activeItem.style.transition = 'all 0.6s ease';
-        activeItem.style.backgroundColor = 'white';
-        activeItem.style.color = 'black';
+        activeItem.style.backgroundColor = '#036C68';
+        activeItem.style.color = 'white';
     }
 };
 
 const playMusic = (index) => {
-    const audioPlayer = document.getElementById('audio-player');
     audioPlayer.src = musicFiles[index].url;
     audioPlayer.play();
     setActiveVerse(index);
@@ -221,8 +241,6 @@ const playNextChapter = async () => {
 };
 
 // Modify the audio player's 'ended' event listener
-// const audioPlayer = document.getElementById('audio-player');
-
 audioPlayer.addEventListener('pause', () => {
     waveform.classList.add('paused');
 });
@@ -266,7 +284,6 @@ function backToSurahList() {
     musicFiles = [];
     
     // Stop audio playback
-    const audioPlayer = document.getElementById('audio-player');
     audioPlayer.pause();
     audioPlayer.currentTime = 0;
     waveform.classList.remove('active');
@@ -274,6 +291,9 @@ function backToSurahList() {
     
     // Hide the verse-text div when going back to the surah list
     verseTextDiv.style.display = 'none';
+    
+    // Show the "Select a surah" text
+    selectSurahText.style.display = 'block';
     
     displaySurahList();
 }

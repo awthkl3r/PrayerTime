@@ -197,22 +197,36 @@ body {
     overflow-y: auto;
 }
 
-
 .waveform {
-    margin: 70px;
+    margin-top: -45px;
+    margin-bottom: -30px;
+    padding: 0;
     width: 150px; /* Increased width to accommodate more bars */
-    height: 120px;
-    --c: linear-gradient(var(--primary) 0 0);
+    height: 100px;
+    --c: linear-gradient(rgba(255, 255, 255, 0.5) 0 0);
     background: 
-        var(--c) 0% 50%, 
-        var(--c) 25% 50%, 
+        var(--c) 10% 50%, /*newly added*/
+
+        var(--c) 20% 50%, 
+        var(--c) 32.75% 50%, 
         var(--c) 50% 50%, 
-        var(--c) 75% 50%, 
-        var(--c) 100% 50%;
-    background-size: 18px 50%;
+        var(--c) 67.75% 50%, 
+        var(--c) 80% 50%,
+
+        var(--c) 90% 50%; /*newly added*/
+    background-size: 
+    18px 50%, 
+    18px 50%, 
+    18px 50%, 
+    18px 50%, 
+    18px 50%, 
+    18px 50%, 
+    18px 50%;
     background-repeat: no-repeat;
-    animation: pulsing 0.8s infinite linear alternate;
+    animation: pulsing 1s infinite linear alternate;
     display: none; /* Hide by default */
+    transform: scale(0.6);
+    z-index: 1000;
 }
 
 .waveform.active {
@@ -224,22 +238,147 @@ body {
 }
 
 @keyframes pulsing {
-    0%, 100% {
-        background-size: 10px calc(40% + var(--r1, 0%)), 13px calc(60% + var(--r2, 0%)), 18px calc(80% + var(--r3, 0%)), 13px calc(60% + var(--r4, 0%)), 10px calc(40% + var(--r5, 0%));
+    /* Base state and final state */
+    0%, 100%{
+        background-size: 
+            10px 25%,  /* Outer bars */
+            13px calc(40% + var(--r1, 0%)),
+            18px calc(60% + var(--r2, 0%)),
+            18px calc(80% + var(--r3, 0%)),  /* Center bar */
+            18px calc(60% + var(--r4, 0%)),
+            13px calc(40% + var(--r5, 0%)),
+            10px 25%;  /* Outer bars */
     }
+    
+    /* First peak */
     20% {
-        background-size: 10px calc(50% + var(--r1, 0%)), 13px calc(70% + var(--r2, 0%)), 18px calc(90% + var(--r3, 0%)), 13px calc(70% + var(--r4, 0%)), 10px calc(50% + var(--r5, 0%));
+        background-size: 
+            10px 25%,
+            13px calc(60% + var(--r1, 0%)),
+            18px calc(80% + var(--r2, 0%)),
+            18px calc(100% + var(--r3, 0%)),  /* Center bar at max */
+            18px calc(80% + var(--r4, 0%)),
+            13px calc(60% + var(--r5, 0%)),
+            10px 25%;
     }
+    
+    /* Maximum height for inner bars */
     40% {
-        background-size: 10px calc(60% + var(--r1, 0%)), 13px calc(80% + var(--r2, 0%)), 18px calc(100% + var(--r3, 0%)), 13px calc(80% + var(--r4, 0%)), 10px calc(60% + var(--r5, 0%));
+        background-size: 
+            10px 25%,
+            13px calc(80% + var(--r1, 0%)),
+            18px calc(90% + var(--r2, 0%)),
+            18px calc(120% + var(--r3, 0%)),  /* Center bar beyond max */
+            18px calc(90% + var(--r4, 0%)),
+            13px calc(80% + var(--r5, 0%)),
+            10px 25%;
     }
+    
+    /* Absolute peak */
     60% {
-        background-size: 10px calc(70% + var(--r1, 0%)), 13px calc(90% + var(--r2, 0%)), 18px calc(110% + var(--r3, 0%)), 13px calc(90% + var(--r4, 0%)), 10px calc(70% + var(--r5, 0%));
+        background-size: 
+            10px 25%,
+            13px calc(85% + var(--r1, 0%)),
+            18px calc(95% + var(--r2, 0%)),
+            18px calc(100% + var(--r3, 0%)),  /* Center bar at absolute max */
+            18px calc(95% + var(--r4, 0%)),
+            13px calc(85% + var(--r5, 0%)),
+            10px 25%;
     }
-    80% {
-        background-size: 10px calc(60% + var(--r1, 0%)), 13px calc(80% + var(--r2, 0%)), 18px calc(100% + var(--r3, 0%)), 13px calc(80% + var(--r4, 0%)), 10px calc(60% + var(--r5, 0%));
-    }
+    
+    /* Start of descent */
+    /* 80% {
+        background-size: 
+            10px 25%,
+            13px calc(80% + var(--r1, 0%)),
+            18px calc(90% + var(--r2, 0%)),
+            18px calc(100% + var(--r3, 0%)),  Center bar starting to descend
+            18px calc(90% + var(--r4, 0%)),
+            13px calc(80% + var(--r5, 0%)),
+            10px 25%;
+    } */
 }
 
 /* You can add more styles as needed */
 
+
+/* Add this at the end of your listen.css file */
+
+.loads {
+    background-color: var(--primary-dark);
+}
+
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ripple div {
+    position: absolute;
+    border: 4px solid #fff;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+    0% {
+      top: 90px;
+      left: 90px;
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+    }
+    4.9% {
+      top: 90px;
+      left: 90px;
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+    }
+    5% {
+      top: 90px;
+      left: 90px;
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+    }
+    100% {
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      opacity: 0;
+    }
+  }
+
+  .line-height{
+    line-height: 2;
+  }
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #036c693e;
+    /* opacity: 0.1; */
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 6px;
+    /* border: 3px solid var(--primary-dark); */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary);
+}

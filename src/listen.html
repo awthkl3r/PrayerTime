@@ -9,19 +9,10 @@
     <link rel="stylesheet" href="../bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="listen.css">
-    <style>
-        .scrollable-list {
-            padding: 20px;
-            max-height: calc(100vh - 300px); /* Adjust this value as needed */
-            overflow-y: auto;
-            /* overflow-x: auto; */
-        }
-
-
-    </style>
 </head>
 
 <body style="height: 100vh;" class="d-flex flex-column justify-content-between overflow-hidden primary-dark text-white">
+    
 
     <nav class="navbar primary">
         <div class=" col container justify-content-center">
@@ -43,37 +34,33 @@
         </div>
     </nav>
 
-    <section class="d-flex flex-row justify-content-evenly flex-grow-1">
-        <div class="p-3 d-flex flex-column" style="width: 100%; height: 100%;">
-            
-            <h2 class="text-center">Surah List</h2>
-            <div class="scrollable-list d-flex flex-column">
-                <button id="back-button" class="btn btn-outline-light" style="display: none; transform: scale(0.9);">Back to Surah List</button>
-                <ul class="music-list" id="music-list">
-                    
-                </ul>
+    <!-- <div class="loads position-absolute w-100 h-100 z-100000 d-flex justify-content-center align-items-center">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div> -->
 
+    <section class="d-flex flex-row justify-content-evenly flex-grow-1">
+        
+        <div class="p-3 d-flex flex-column justify-content-center" style="width: 100%; height: 100%;">
+            
+            <h3 class="text-center">Surah List</h3>
+            <div class="scrollable-list d-flex flex-column">
+                <ul class="music-list" id="music-list">  
+                </ul>
             </div>
         </div>
 
         <div class="p-3 d-flex flex-column justify-content-around align-items-center" style="width: 100%; height: 100%;">
-            <h2 class="text-center">Quran Player</h2>
+            <!-- <h2 class="text-center">Quran Player</h2> -->
 
-            <div class="waveform"></div>
-
-            <p class="text-center">Select a surah from the list to load its verses.</p>
-
-            <div class="d-flex flex-column gap-5 pt-5 justify-content-center align-items-center verse-text">
-                <h4 id="verse-text-arabic" class="text-center amiri fs-2"></h4>
+            <p id="select-surah-text" class="text-center">Select a surah from the list to load its verses.</p>
+            <button id="back-button" class="btn btn-outline-light" style="display: none; transform: scale(0.8);">Back to Surah List</button>
+            <div class="d-flex flex-column gap-5 pt-5 justify-content-center align-items-center verse-text scrollable-list">
+                
+                <h4 id="verse-text-arabic" class="text-center amiri fs-2 line-height"></h4>
+                <div class="waveform"></div>
                 <h4 id="verse-text-translation" class="text-center fs-5"></h4>
 
             </div>
-
-
-
-
-            
-
             
         </div>
     </section>

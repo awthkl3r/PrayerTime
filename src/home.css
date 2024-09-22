@@ -32,3 +32,23 @@
     height: 48px;
     padding: 5px;
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #036c693e;
+    /* opacity: 0.1; */
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 6px;
+    /* border: 3px solid var(--primary-dark); */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary);
+}
