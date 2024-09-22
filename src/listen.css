@@ -197,5 +197,49 @@ body {
     overflow-y: auto;
 }
 
+
+.waveform {
+    margin: 70px;
+    width: 150px; /* Increased width to accommodate more bars */
+    height: 120px;
+    --c: linear-gradient(var(--primary) 0 0);
+    background: 
+        var(--c) 0% 50%, 
+        var(--c) 25% 50%, 
+        var(--c) 50% 50%, 
+        var(--c) 75% 50%, 
+        var(--c) 100% 50%;
+    background-size: 18px 50%;
+    background-repeat: no-repeat;
+    animation: pulsing 0.8s infinite linear alternate;
+    display: none; /* Hide by default */
+}
+
+.waveform.active {
+    display: block; /* Show when active */
+}
+
+.waveform.paused {
+    animation-play-state: paused;
+}
+
+@keyframes pulsing {
+    0%, 100% {
+        background-size: 10px calc(40% + var(--r1, 0%)), 13px calc(60% + var(--r2, 0%)), 18px calc(80% + var(--r3, 0%)), 13px calc(60% + var(--r4, 0%)), 10px calc(40% + var(--r5, 0%));
+    }
+    20% {
+        background-size: 10px calc(50% + var(--r1, 0%)), 13px calc(70% + var(--r2, 0%)), 18px calc(90% + var(--r3, 0%)), 13px calc(70% + var(--r4, 0%)), 10px calc(50% + var(--r5, 0%));
+    }
+    40% {
+        background-size: 10px calc(60% + var(--r1, 0%)), 13px calc(80% + var(--r2, 0%)), 18px calc(100% + var(--r3, 0%)), 13px calc(80% + var(--r4, 0%)), 10px calc(60% + var(--r5, 0%));
+    }
+    60% {
+        background-size: 10px calc(70% + var(--r1, 0%)), 13px calc(90% + var(--r2, 0%)), 18px calc(110% + var(--r3, 0%)), 13px calc(90% + var(--r4, 0%)), 10px calc(70% + var(--r5, 0%));
+    }
+    80% {
+        background-size: 10px calc(60% + var(--r1, 0%)), 13px calc(80% + var(--r2, 0%)), 18px calc(100% + var(--r3, 0%)), 13px calc(80% + var(--r4, 0%)), 10px calc(60% + var(--r5, 0%));
+    }
+}
+
 /* You can add more styles as needed */
 

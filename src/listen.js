@@ -15,6 +15,9 @@ const verseTextDiv = document.querySelector('.verse-text');
 // Add this line at the beginning of the file
 const surahListTitle = document.querySelector('.p-3 h2');
 
+const waveform = document.querySelector('.waveform');
+const audioPlayer = document.getElementById('audio-player');
+
 function updateSelectedReciter(reciter) {
     selectedReciter = reciter;
     const dropdownButton = document.getElementById('reciterDropdown');
@@ -165,6 +168,8 @@ const playMusic = (index) => {
     audioPlayer.src = musicFiles[index].url;
     audioPlayer.play();
     setActiveVerse(index);
+    waveform.classList.add('active');
+    waveform.classList.remove('paused');
 };
 
 // Modify the playNextMusic function
@@ -216,12 +221,24 @@ const playNextChapter = async () => {
 };
 
 // Modify the audio player's 'ended' event listener
-const audioPlayer = document.getElementById('audio-player');
+// const audioPlayer = document.getElementById('audio-player');
+
+audioPlayer.addEventListener('pause', () => {
+    waveform.classList.add('paused');
+});
+
+audioPlayer.addEventListener('play', () => {
+    waveform.classList.add('active');
+    waveform.classList.remove('paused');
+});
+
 audioPlayer.addEventListener('ended', () => {
     if (repeat) {
         audioPlayer.currentTime = 0;
         audioPlayer.play();
     } else {
+        waveform.classList.remove('active');
+        waveform.classList.add('paused');
         playNextMusic();
     }
 });
@@ -252,6 +269,8 @@ function backToSurahList() {
     const audioPlayer = document.getElementById('audio-player');
     audioPlayer.pause();
     audioPlayer.currentTime = 0;
+    waveform.classList.remove('active');
+    waveform.classList.add('paused');
     
     // Hide the verse-text div when going back to the surah list
     verseTextDiv.style.display = 'none';
@@ -274,6 +293,19 @@ window.addEventListener('load', () => {
             updateSelectedReciter(reciter);
         });
     });
+
+    // Add this function to create the waveform bars
+    function createWaveformBars() {
+        const waveform = document.querySelector('.waveform');
+        waveform.innerHTML = '';
+        for (let i = 0; i < 5; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'waveform-bar';
+            waveform.appendChild(bar);
+        }
+    }
+
+    createWaveformBars();
 });
 
 // Modify the setActiveVerse function
