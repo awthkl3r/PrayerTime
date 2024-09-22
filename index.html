@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            zoom: 1;
+            -moz-transform: scale(1);
+            -moz-transform-origin: 0 0;
+            transition: all 0.3s ease;
+        }
+    </style>
     <meta name="title" content="PrayerTime">
     <meta name="description" content=" Get accurate prayer times for your region with our simple and efficient tool. Easy access, designed for simplicity and effectiveness. Stay connected to faith. ">
     <title>PrayerTime.</title>
@@ -36,8 +44,20 @@
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "miqo3c1phd");
     </script>
+    <script>
+        function adjustZoom() {
+            const width = window.screen.width;
+            setTimeout(() => {
+                if (width < 1920) {  // Typical laptop screen width
+                    document.body.style.zoom = "80%";
+                    document.body.style.MozTransform = "scale(0.8)";
+                }
+            }, 100);  // 100ms delay
+        }
+        window.addEventListener('DOMContentLoaded', adjustZoom);
+    </script>
 </head>
-<body class="h-100 overflow-x-hidden garamond primary-dark text-white ">
+<body class="h-100 overflow-x-hidden garamond primary-dark text-white">
     <nav class="navbar primary">
         <div class=" col container justify-content-center">
             <a class="navbar-brand" href="./index.html">
@@ -45,7 +65,7 @@
             </a>
         </div>
         <div class="container col justify-content-center gap-5">
-            <a class="nav-item text-decoration-none" href="src/prayers.html">
+                <a class="nav-item text-decoration-none" href="./src/prayers.html">
                 <h3 class="text-white">Prayers</h3>
             </a>
         </div>
@@ -58,7 +78,7 @@
 
             <div class="pt-3 container d-flex row justify-content-around my-5 gap-5 h-100">
 
-                <div class="container-fluid overflow-auto overflow-lg-visible">
+                <div class="container-fluid overflow-auto overflow-lg-visible" >
                     <div class="row flex-nowrap g-5" style="width: 100%; width: 130%;">
                         <style>
                             @media (max-width: 992px) {
@@ -79,7 +99,7 @@
                                         <h5 class="" >get live prayer times.</h5>
                                     </div>
                                     <div>
-                                        <a href="src/prayers.html">
+                                        <a href="./src/prayers.html">
                                             <button class="btn btn-color-primary btn-lg my-3">
                                                 <b>Enter</b>  <i class="bi ms-2 bi-arrow-right"></i>
                                             </button>
@@ -101,7 +121,7 @@
                                         <h5>Learn the daily prayers.</h5>
                                     </div>
                                     <div>
-                                        <a href="src/learn.html">
+                                        <a href="./src/learn.html">
                                             <button class="btn btn-color-primary btn-lg btn-outline-dark my-3">
                                                 <b>Learn</b>  <i class="bi ms-2 bi-arrow-right"></i>
                                             </button>
@@ -123,7 +143,7 @@
                                         <h5 class="" >listen to the holy quran.</h5>
                                     </div>
                                     <div>
-                                        <a href="src/listen.html">
+                                        <a href="./src/listen.html">
                                             <button class="btn btn-color-primary btn-lg my-3">
                                                 <b>Listen</b>  <i class="bi ms-2 bi-arrow-right"></i>
                                             </button>
@@ -147,7 +167,7 @@
 
     <script>
         var arabicNormChar = {
-            'ك': 'ک', 'ﻷ': 'لا', 'ؤ': 'و', 'ى': 'ی', 'ي': 'ی', 'ئ': 'ی', 'أ': 'ا', 'إ': 'ا', 'آ': 'ا', 'ٱ': 'ا', 'ٳ': 'ا', 'ة': 'ه', 'ء': '', 'ِ': '', 'ْ': '', 'ُ': '', 'َ': '', 'ّ': '', 'ٍ': '', 'ً': '', 'ٌ': '', 'ٓ': '', 'ٰ': '', 'ٔ': '', '�': ''
+            'ك': 'ک', 'ﻷ': 'لا', 'ؤ': 'و', 'ى': 'ی', 'ي': 'ی', 'ئ': 'ی', 'أ': 'ا', 'إ': 'ا', 'آ': 'ا', 'ٱ': 'ا', 'ٳ': 'ا', 'ة': 'ه', 'ء': '', 'ِ': '', 'ْ': '', 'ُ': '', 'َ': '', 'ّ': '', 'ٍ': '', 'ً': '', 'ٌ': '', 'ٓ': '', 'ٰ': '', 'ٔ': '', '': ''
         }
 
         let quran = null
@@ -192,7 +212,6 @@
                                 console.log(quran[i])
                             }
                             else{
-                                console.log("no")
                                 fetchquran()
                             }
                         }
