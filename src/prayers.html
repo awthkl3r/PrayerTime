@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            zoom: 1;
+            -moz-transform: scale(1);
+            -moz-transform-origin: 0 0;
+            transition: all 0.3s ease;
+        }
+    </style>
+    <script>
+        function adjustZoom() {
+            const width = window.screen.width;
+            if (width < 1920) {  // Typical laptop screen width
+                document.body.style.zoom = "80%";
+                document.body.style.MozTransform = "scale(0.8)";
+            }
+        }
+        window.onload = adjustZoom;
+    </script>
     <meta name="title" content="PrayerTime">
     <meta name="description" content=" Get accurate prayer times for your region with our simple and efficient tool. Easy access, designed for simplicity and effectiveness. Stay connected to faith. ">
     <title>PrayerTime.</title>
